@@ -377,31 +377,53 @@
 }
 
 
-/* === 搜尋結果：姓名與 IG 放大 + 粗體 + 金屬漸層金（高擬真） === */
-.namebar .personN,
-.namebar .ig{
+/* === Override: show full PNG (no circular crop) === */
+.cat-btn{
+  width:auto !important;
+  height:auto !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  overflow:visible !important;
+}
+.cat-btn img.upload-icon{
+  width:auto !important;
+  height:80px !important;        /* adjust if you want a different visual size */
+  object-fit:contain !important;  /* keep full image without cropping */
+  display:block !important;
+  border-radius:0 !important;
+}
+
+
+/* === 純漸層金色版本（無描邊，乾淨亮金） === */
+.namebar .personN{
+  font-family: 'Montserrat', 'Helvetica Neue', 'Arial', sans-serif !important;
   background: linear-gradient(180deg,
-    #EBD28C 0%,
-    #F3E3A8 25%,
-    #DAB64D 45%,
-    #BA8B2B 70%,
-    #76561D 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
+    #EAD28A 0%,   /* 淺金亮面 */
+    #D9B550 35%,  /* 主金色 */
+    #B98A32 70%,  /* 中金陰影 */
+    #7A6027 100%  /* 底金暗部 */
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
   color: transparent !important;
+  text-align: center !important;
   font-weight: 900 !important;
 }
 
-/* 尺寸微調：比原本再大一點 */
-.namebar .personN{ font-size: 18px !important; }  /* 原 15px */
-.namebar .ig{     font-size: 15px !important; }  /* 原 13px */
+/* IG：左對齊 + 銀灰色（保留簡潔） */
+.namebar .ig{
+  background: none !important;
+  color: #BFC5C9 !important;
+  text-align: left !important;
+}
 
-
-/* IG 置中顯示 */
-.namebar .ig {
-  text-align: center !important;
-  justify-content: center !important;
-  display: flex !important;
+/* 移除右下角 RAKU 外框 / 底色 / 陰影 */
+.cat-btn{
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 </style>

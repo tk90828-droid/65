@@ -6,6 +6,7 @@
 <title>Taiwan Pride 🌈｜Reservation Confirmation｜10/24 週五晚餐名單</title>
 <style>
   :root{
+    /* S2 風格色盤 */
     --bg:#0A0B0F; --card:#10131A; --muted:#9AA4AF; --fg:#F2F5F8; --border:#1f2430;
     --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
     --rainbow: linear-gradient(90deg,#ff5f6d,#ffc371,#9be15d,#00e3ae,#45aaf2,#9b59b6);
@@ -36,7 +37,8 @@
     -webkit-background-clip:text;background-clip:text;
     color:transparent;
     text-shadow:0 0 12px rgba(255,255,255,.08);
-    font-weight:900;letter-spacing:.2px;
+    font-weight:900;
+    letter-spacing:.2px;
   }
 
   /* 搜尋卡 */
@@ -50,6 +52,7 @@
   .input-wrap{display:flex;flex-direction:column;min-width:0}
   input,button{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--border);background:#0f1117;color:var(--fg);outline:none;font-size:14px}
   input::placeholder{color:#6b7280}
+  /* 搜尋按鈕：漸層青色 */
   button.primary{background:var(--btn-grad);border:0;color:#0b0c10;font-weight:900;letter-spacing:.2px}
   button.primary:hover{filter:saturate(1.08);}
 
@@ -71,19 +74,33 @@
   .namebar .country{flex:0 0 8px;max-width:8px;overflow:hidden;white-space:nowrap;opacity:0.6}
   .namebar .personN{color:#fff;font-weight:900;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
   @media (min-width:861px){
-    .namebar .personN,.namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .namebar .personN,.namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
   }
   @media (max-width:420px){
     .namebar .personN{color:#fff;font-weight:900;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   }
+  /* 預設小字體（維持既有樣式） */
+  .namebar .personN{color:#fff;font-weight:900;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-  /* 狀態徽章（厚外圈＋深色內心＋白色符號） */
+  @media (min-width: 861px){
+    .namebar .personN,.namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+  }
+
+  /* === 狀態徽章（厚外圈＋深色內心＋白色符號；高級感） === */
   .status{display:inline-flex;align-items:center;gap:8px}
   .badge{position:relative;width:22px;height:22px;display:grid;place-items:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
   .badge svg{width:22px;height:22px;display:block}
-  .badge.ok{color:var(--ok)} .badge.warn{color:var(--warn)} .badge.bad{color:var(--bad)}
+  .badge.ok{color:var(--ok)}
+  .badge.warn{color:var(--warn)}
+  .badge.bad{color:var(--bad)}
   .badge .ring{fill:#0f1117;stroke:currentColor;stroke-width:2.6}
   .badge .glyph{stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none}
   .badge .glyph-text{fill:#fff;font-size:12px;font-family:ui-sans-serif,system-ui;dominant-baseline:middle;text-anchor:middle}
@@ -92,19 +109,20 @@
   .status-label .zh{font-size:12px}
   .status-label .en{font-size:11px;opacity:.9}
 
-  /* 開啟連結（螢光風） */
+  /* 「開啟連結」：無外框、螢光風、小尺寸 */
   .link-btn{padding:6px 9px;border-radius:10px;border:none;background:rgba(0,255,209,.08);
     box-shadow:0 0 0 1px rgba(0,255,209,.25),0 0 18px rgba(0,255,209,.18) inset,0 0 20px rgba(0,255,209,.15);
     color:#e5e7eb;font-size:12px;font-weight:700}
   .link-btn:hover{box-shadow:0 0 0 1px rgba(0,255,209,.4),0 0 26px rgba(0,255,209,.25) inset,0 0 26px rgba(0,255,209,.22)}
 
+  /* 確認／下載：更小、兩行 */
   .actions{display:flex;gap:10px;justify-content:space-between}
   .btn{padding:6px 9px;border-radius:12px;border:1px solid #2b3244;background:#0f1117;color:#e5e7eb;cursor:pointer;font-size:12.5px}
   .btn:hover{border-image:var(--rainbow) 1;border-width:1px;border-style:solid}
   .btn .zh{display:block;font-weight:800}
   .btn .en{display:block;font-size:11px;opacity:.9;font-weight:700}
 
-  /* 左下：上傳底圖（維持原功能用貓圖示） */
+  /* 左下：一隻貓（上傳邀請卡底圖） */
   .cat-wrap{position:fixed;left:12px;bottom:12px;display:flex;gap:8px;opacity:.9;z-index:30}
   .cat-btn{width:56px;height:56px;border-radius:50%;background:#0f1117;border:1px solid #2b3244;display:grid;place-items:center;cursor:pointer;transition:transform .08s ease, box-shadow .2s}
   .cat-btn:hover{box-shadow:0 0 0 2px rgba(255,255,255,.06), 0 8px 20px rgba(0,0,0,.35)}
@@ -128,58 +146,352 @@
   .btn-line{border:1px solid #2b3244;background:#0f1117;color:#e5e7eb}
   .btn-fill{background:transparent;border:1px solid transparent;border-image:var(--rainbow) 1;font-weight:900}
 
-  /* 手機調整 */
-  @media (max-width:860px){ .row{grid-template-columns:1fr} .actions{justify-content:space-between} }
-  @media (max-width:420px){ .tl .t1{font-size:24px} .tl .t2{font-size:18px} .tl .t3{font-size:14px} .btn{font-size:12px} }
+  /* 手機微縮與 IG 自動換行（必要時才省略） */
+  @media (max-width:860px){
+    .row{grid-template-columns:1fr}
+    .actions{justify-content:space-between}
+    .namebar .personN,.namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+  }
+  @media (max-width:420px){
+    .namebar{}
+    .namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+    .tl .t1{font-size:24px}
+    .tl .t2{font-size:18px}
+    .tl .t3{font-size:14px}
+    .btn{font-size:12px}
+  }
 
+  /* When a .line has only one child, don't spread space */
   .line{justify-content:space-between}
   .line:has(> :only-child){justify-content:flex-start}
+
+  /* === SAFE OVERRIDES (do not touch JS) === */
   .person > .line:first-of-type{justify-content:flex-start;width:100%}
   .person > .line:first-of-type > .left.namebar{flex:1 1 auto;width:100%}
 
-  .spinner{display:inline-block;width:14px;height:14px;margin-left:8px;vertical-align:-2px;border:2px solid rgba(255,255,255,.18);border-top-color:#a7f3d0;border-radius:50%;animation:spin 0.9s linear infinite; box-shadow:0 0 10px rgba(167,243,208,.35)}
+  /* Loading spinner（尾巴轉圈） */
+  .spinner{
+    display:inline-block;width:14px;height:14px;margin-left:8px;vertical-align:-2px;
+    border:2px solid rgba(255,255,255,.18);border-top-color:#a7f3d0;border-radius:50%;
+    animation:spin 0.9s linear infinite; box-shadow:0 0 10px rgba(167,243,208,.35)
+  }
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* === Overview：總覽面板（橫向捲動） === */
-  .ovr-fab{
-    position:fixed; left:12px; bottom:76px; z-index:31;
-    width:44px; height:44px; border-radius:12px;
-    display:grid; place-items:center; cursor:pointer;
-    background:#0f1117; border:1px solid #2b3244;
-    box-shadow:0 8px 20px rgba(0,0,0,.35);
-  }
-  .ovr-fab:hover{ box-shadow:0 0 0 2px rgba(255,255,255,.06), 0 10px 24px rgba(0,0,0,.45) }
-  .ovr-fab svg{ width:22px; height:22px; stroke:#e5e7eb }
 
-  .ovr-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:60 }
-  .ovr-panel{
-    width:min(1200px,96vw); height:min(80vh,760px);
-    background:#0f1117; border:1px solid #2b3244; border-radius:16px;
-    box-shadow:0 20px 60px rgba(0,0,0,.6); padding:12px;
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .ovr-head{ display:flex; align-items:center; justify-content:space-between }
-  .ovr-title{ font-weight:900; font-size:16px }
-  .ovr-close{ cursor:pointer; padding:6px 10px; border-radius:8px; border:1px solid #2b3244 }
-  .ovr-close:hover{ background:#141821 }
+/* === 状態文字彩色光暈（未回覆=橘 / 已確認=綠 / 取消=紅） === */
+.status .badge.warn + .status-label .zh,
+.status .badge.warn + .status-label .en{
+  text-shadow:0 0 6px rgba(245,158,11,.65), 0 0 12px rgba(245,158,11,.35);
+}
+.status .badge.ok + .status-label .zh,
+.status .badge.ok + .status-label .en{
+  text-shadow:0 0 6px rgba(34,197,94,.60), 0 0 12px rgba(34,197,94,.30);
+}
+.status .badge.bad + .status-label .zh,
+.status .badge.bad + .status-label .en{
+  text-shadow:0 0 6px rgba(239,68,68,.60), 0 0 12px rgba(239,68,68,.30);
+}
 
-  .ovr-scroll{ flex:1; overflow:auto; padding-bottom:4px }
-  .ovr-cols{ display:flex; gap:10px; min-width:100% }
-  .ovr-col{
-    flex:0 0 240px; max-width:240px;
-    background:#10131A; border:1px solid #1f2430; border-radius:12px;
-    padding:10px; display:flex; flex-direction:column; gap:8px;
-  }
-  .ovr-leader{
-    font-weight:900; font-size:14px;
-    background:var(--rainbow); -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .ovr-item{ display:flex; align-items:center; gap:6px; font-size:13px; color:#e5e7eb; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
-  .ovr-item .flag{ font-size:16px }
+
+/* name 與 IG 金色（覆蓋） */
+.namebar .personN,
+.namebar .ig{
+  background: linear-gradient(180deg,
+    #EAD28A 0%,
+    #D9B550 35%,
+    #B98A32 70%,
+    #7A6027 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  font-weight: 900 !important;
+}
+
+/* ===== Overrides for status colors, buttons, and link button per request ===== */
+
+/* 1) 狀態文字：顏色 + 粗體 + 同色陰影 */
+.status .badge.ok + .status-label .zh,
+.status .badge.ok + .status-label .en{
+  color:#47D45A !important;
+  font-weight:900 !important;
+  text-shadow:0 0 6px rgba(71,212,90,.65) !important;
+}
+.status .badge.warn + .status-label .zh,
+.status .badge.warn + .status-label .en{
+  color:#FFC000 !important;
+  font-weight:900 !important;
+  text-shadow:0 0 6px rgba(255,192,0,.6) !important;
+}
+.status .badge.bad + .status-label .zh,
+.status .badge.bad + .status-label .en{
+  color:#C00000 !important;
+  font-weight:900 !important;
+  text-shadow:0 0 6px rgba(192,0,0,.6) !important;
+}
+
+/* 2) 確認 / 邀請函按鈕：改成「開啟連結」的外觀，但 hover 仍保留彩虹外框 */
+.actions .btn{
+  border: none !important;
+  background: rgba(0,255,209,.08) !important;
+  box-shadow: 0 0 0 1px rgba(0,255,209,.25),
+              0 0 18px rgba(0,255,209,.18) inset,
+              0 0 20px rgba(0,255,209,.15) !important;
+  color: #e5e7eb !important;
+  font-weight: 800 !important;
+  padding: 6px 9px;
+  border-radius: 10px;
+}
+.actions .btn:hover{
+  background: rgba(0,255,209,.08) !important;
+  box-shadow: 0 0 0 1px rgba(0,255,209,.35),
+              0 0 22px rgba(0,255,209,.22) inset,
+              0 0 24px rgba(0,255,209,.20) !important;
+  border: 1px solid transparent !important;
+  border-image: var(--rainbow) 1 !important;
+}
+
+/* 3) 開啟連結按鈕：青色文字 + 底線；移除外光與外框 */
+.link-btn{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: #00FFD1 !important;
+  text-decoration: underline !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-weight: 800 !important;
+}
+.link-btn:hover{
+  text-decoration: underline !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+
+/* ===== 按鈕縮小高度與字體 (Confirm / Invite buttons only) ===== */
+.actions .btn{
+  padding: 4px 8px !important;
+  border-radius: 9px !important;
+  font-size: 11.5px !important;
+  line-height: 1.2 !important;
+}
+.actions .btn .zh{
+  font-size: 11.5px !important;
+}
+.actions .btn .en{
+  font-size: 10px !important;
+}
+
+
+  /* === 狀態統計列（首頁） === */
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 10px}
+  .stats .chip{display:flex;align-items:center;gap:8px;background:#0f1117;border:1px solid #2b3244;border-radius:999px;padding:6px 10px}
+  .stats .chip .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .stats .chip.ok .dot{background:#22c55e}
+  .stats .chip.warn .dot{background:#f59e0b}
+  .stats .chip.bad .dot{background:#ef4444}
+  .stats .chip .lab{font-size:12px;color:#aeb7c2}
+  .stats .chip .num{font-size:13px;color:#fff;min-width:14px;text-align:right}
+
+  /* IG 連結：使用 SVG 圖示 */
+  .ig-link{display:inline-flex;align-items:center;gap:6px;padding:4px 6px;border-radius:8px;color:#E1306C}
+  .ig-link svg{width:16px;height:16px;display:block}
+  .ig-link:hover{background:linear-gradient(90deg, rgba(255,192,203,.25), rgba(255,105,180,.25));box-shadow:0 0 6px rgba(255,182,193,.4), inset 0 0 4px rgba(255,182,193,.2)}
+
+
+/* ===== IG 圖示按鈕（使用提供的圖片；移除底線；邊緣彩虹光暈） ===== */
+.link-btn.ig-btn{
+  position: relative !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+}
+.link-btn.ig-btn::before{
+  content: "" !important;
+  position: absolute !important;
+  inset: -4px !important;
+  border-radius: 12px !important;
+  background: conic-gradient(#ff5f6d,#ffc371,#9be15d,#00e3ae,#45aaf2,#9b59b6,#ff5f6d) !important;
+  filter: blur(7px) !important;
+  opacity: .9 !important;
+  z-index: -1 !important;
+}
+.link-btn.ig-btn:hover{
+  transform: translateZ(0) scale(1.03) !important;
+}
+.link-btn.ig-btn img.ig-icon{
+  width: 24px !important;
+  height: 24px !important;
+  display: block !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset !important;
+}
+
+
+/* === 右下角上傳按鈕（RAKU.png） === */
+.cat-wrap{
+  position:fixed;
+  right:12px;
+  left:auto;
+  bottom:12px;
+  display:flex;
+  gap:8px;
+  opacity:.9;
+  z-index:30;
+}
+.cat-btn{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#0f1117;
+  border:1px solid #2b3244;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transition:transform .08s ease, box-shadow .2s;
+  overflow:hidden;
+  padding:0;
+}
+.cat-btn img.upload-icon{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:50%;
+}
+.cat-btn:hover{
+  box-shadow:0 0 0 2px rgba(255,255,255,.06), 0 8px 20px rgba(0,0,0,.35);
+}
+.cat-btn:active{
+  transform:scale(.97);
+}
+
+
+/* === Override: show full PNG (no circular crop) === */
+.cat-btn{
+  width:auto !important;
+  height:auto !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  border:none !important;
+  padding:0 !important;
+  overflow:visible !important;
+}
+.cat-btn img.upload-icon{
+  width:auto !important;
+  height:80px !important;        /* adjust if you want a different visual size */
+  object-fit:contain !important;  /* keep full image without cropping */
+  display:block !important;
+  border-radius:0 !important;
+}
+
+
+/* === 純漸層金色版本（無描邊，乾淨亮金） === */
+.namebar .personN{
+  font-family: 'Montserrat', 'Helvetica Neue', 'Arial', sans-serif !important;
+  background: linear-gradient(180deg,
+    #EAD28A 0%,   /* 淺金亮面 */
+    #D9B550 35%,  /* 主金色 */
+    #B98A32 70%,  /* 中金陰影 */
+    #7A6027 100%  /* 底金暗部 */
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-align: center !important;
+  font-weight: 900 !important;
+}
+
+/* IG：左對齊 + 銀灰色（保留簡潔） */
+.namebar .ig{
+  background: none !important;
+  color: #BFC5C9 !important;
+  text-align: left !important;
+}
+
+/* 移除右下角 RAKU 外框 / 底色 / 陰影 */
+.cat-btn{
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* ===== v25c：總覽（Overview）樣式 ===== */
+.overview-wrap.left{  position:fixed; left:12px;  bottom:12px; z-index:31; opacity:.95; display:flex; gap:10px; align-items:center }
+.raku-btn{ width:auto; height:auto; border:none; background:transparent; padding:0; cursor:pointer }
+.raku-btn img{ height:80px; display:block; object-fit:contain }
+
+#overviewBackdrop{ position:fixed; inset:0; display:none; z-index:60 }
+#overviewMask{ position:absolute; inset:0; background:rgba(0,0,0,.6) }
+#overviewPanel{
+  position:absolute; inset:6% 3% 9% 3%;
+  background:#0f1117; border:1px solid #2b3244; border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  display:flex; flex-direction:column;
+}
+.ov-head{ display:flex; align-items:center; justify-content:space-between; padding:10px 14px; gap:8px; flex-wrap:wrap }
+.ov-title{ font-weight:900; font-size:18px }
+.ov-tools{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+.ov-btn{ padding:6px 10px; border-radius:10px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb; font-weight:800; cursor:pointer }
+.ov-btn.primary{ border:0; background:linear-gradient(90deg,#a7f3d0,#93c5fd); color:#0b0c10; font-weight:900 }
+
+/* 可調欄寬：預設 100px；JS 會改 grid-auto-columns */
+.ov-scroller{ flex:1; overflow:auto; padding:8px 12px 12px; scroll-snap-type:x mandatory; white-space:nowrap }
+.ov-row{ display:inline-grid; grid-auto-flow:column; grid-auto-columns:100px; gap:8px }
+
+.table-card{
+  scroll-snap-align:start;
+  background:#10131A; border:1px solid #2b3244; border-radius:12px; padding:6px;
+  min-height:110px; display:flex; flex-direction:column; gap:6px;
+}
+.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px }
+.table-title{
+  font-weight:900; font-size:12px;
+  background:linear-gradient(90deg,#ff5f6d,#ffc371,#9be15d,#00e3ae,#45aaf2,#9b59b6);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.table-meta{ font-size:10px; color:#9AA4AF }
+
+.member{
+  display:flex; align-items:center; gap:4px; padding:3px 4px; border-radius:8px;
+  border:1px dashed #2b3244; background:rgba(255,255,255,.02);
+  user-select:none;
+}
+.member .m-flag{ font-size:12px; flex:0 0 auto }
+.member .m-name{
+  font-size:11px; color:#E5E7EB; font-weight:800;
+  max-width:86px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+.table-card.drag-hover{ outline:2px dashed #93c5fd; outline-offset:2px }
+
+/* 隱藏列（底部） */
+#ovHiddenBar{ padding:8px 12px; border-top:1px solid #2b3244; display:none; gap:8px; align-items:center; justify-content:space-between }
+#ovHiddenList{ display:flex; gap:6px; flex-wrap:wrap; max-height:72px; overflow:auto }
+.badge{ font-size:11px; border:1px solid #2b3244; border-radius:999px; padding:4px 8px; color:#e5e7eb }
+.badge.btn{ cursor:pointer }
+
+/* 欄寬調整控制（數值輸入，30~120px） */
+.ctrl{ display:flex; gap:6px; align-items:center }
+.ctrl label{ font-size:12px; color:#9AA4AF }
+.ctrl input[type="number"]{ width:88px; padding:6px 8px; border-radius:10px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb }
+
 </style>
 </head>
 <body>
   <div class="wrap">
+    <!-- 三行標題（白字＋光暈） -->
     <div class="title tl">
       <div class="t1">Taiwan Pride 🌈</div>
       <div class="t2">Reservation Confirmation</div>
@@ -187,7 +499,16 @@
     </div>
     <div class="rainbow-line"></div>
 
+    <!-- 狀態統計（首頁） -->
+    <div id="stats" class="stats" aria-label="status summary">
+      <div class="chip ok"><span class="dot"></span><span class="lab">已確認</span><b class="num" id="statOk">0</b></div>
+      <div class="chip warn"><span class="dot"></span><span class="lab">未回覆</span><b class="num" id="statWarn">0</b></div>
+      <div class="chip bad"><span class="dot"></span><span class="lab">取消</span><b class="num" id="statBad">0</b></div>
+    </div>
+
+
     <div class="card">
+      <!-- 搜尋列 -->
       <div class="row">
         <div class="input-wrap">
           <label>姓名 / NAME</label>
@@ -204,6 +525,7 @@
         </div>
       </div>
 
+      <!-- 底圖預覽（上傳成功才會出現縮圖） -->
       <div id="bgPreview" class="preview" aria-label="invitation previews"></div>
 
       <div id="head" class="result-head">資料載入中… / Loading roster… <span class="spinner" aria-hidden="true"></span></div>
@@ -211,40 +533,52 @@
     </div>
   </div>
 
-  <!-- 左下：上傳邀請卡底圖 -->
+  <!-- 左下角：一隻貓（上傳邀請卡底圖；僅提示密碼於 prompt，不在畫面顯示） -->
   <div class="cat-wrap" aria-label="hidden-control">
     <div id="btnUploadBG" class="cat-btn" title="上傳邀請卡底圖 Upload invitation background">
-      <svg class="cat" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M6 8C6 5 7 3 9.5 4.5L12 6l2.5-1.5C17 3 18 5 18 8c2 1 3 3.5 3 6 0 4-3.5 8-9 8S3 18 3 14c0-2.5 1-5 3-6Z" />
-      </svg>
+    <img src="RAKU.png" alt="Upload background" class="upload-icon">
+  </div>
+</div>
+
+  <!-- 隱藏 input（只剩底圖） -->
+  
+<!-- 左下：RAKU 總覽按鈕（僅左側） -->
+<div class="overview-wrap left" aria-label="overview-left">
+  <button id="btnOverviewLeft" class="raku-btn" title="開啟總覽（需密碼）">
+    <img src="RAKU.png" alt="Overview">
+  </button>
+</div>
+
+<!-- 總覽面板 -->
+<div id="overviewBackdrop">
+  <div id="overviewMask"></div>
+  <div id="overviewPanel">
+    <div class="ov-head">
+      <div class="ov-title">桌次總覽（Flag + Name）</div>
+      <div class="ov-tools">
+        <div class="ctrl">
+          <label for="ovColWidth">欄寬(px)</label>
+          <input id="ovColWidth" type="number" min="30" max="120" step="2" value="100" />
+          <button id="ovApplyWidth" class="ov-btn">套用</button>
+        </div>
+        <button id="ovClose" class="ov-btn">Close</button>
+        <button id="ovSave" class="ov-btn primary" disabled>Save</button>
+      </div>
+    </div>
+    <div id="ovScroller" class="ov-scroller" style="display:none">
+      <div id="ovRow" class="ov-row"></div>
+    </div>
+    <div id="ovHiddenBar">
+      <div class="hint" style="color:#9AA4AF;font-size:12px">已隱藏：<span id="ovHiddenCount">0</span></div>
+      <div id="ovHiddenList"></div>
+      <div class="ctrl">
+        <button id="ovUnhideAll" class="ov-btn">取消全部隱藏</button>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Overview FAB（左下，貓圖之上） -->
-  <div id="btnOverview" class="ovr-fab" title="總覽 Overview（需密碼）">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="2"></rect>
-      <rect x="14" y="3" width="7" height="7" rx="2"></rect>
-      <rect x="3" y="14" width="7" height="7" rx="2"></rect>
-      <rect x="14" y="14" width="7" height="7" rx="2"></rect>
-    </svg>
-  </div>
-
-  <!-- Overview 面板 -->
-  <div id="ovrBackdrop" class="ovr-backdrop" aria-hidden="true">
-    <div class="ovr-panel">
-      <div class="ovr-head">
-        <div class="ovr-title">桌長總覽 / Leaders Overview</div>
-        <button id="ovrClose" class="ovr-close">關閉 Close</button>
-      </div>
-      <div class="ovr-scroll">
-        <div id="ovrCols" class="ovr-cols"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 隱藏 input -->
-  <input id="fileBG" type="file" accept="image/*" style="display:none" />
+<input id="fileBG" type="file" accept="image/*" style="display:none" />
 
   <!-- Confirm Modal -->
   <div id="confirmBackdrop" class="backdrop">
@@ -266,284 +600,490 @@
   <!-- Toast -->
   <div id="toast" class="toast"></div>
 
-<script>
-/* ========== (1) 設定：把這裡換成你的 GAS URL ========== */
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJdToNoRIc2q5-jT53c6jwcD6WNNDbNOBmhqE2ulDLmNDsBDo86hCVqj32AI9Fp53n/exec';
-const PASSWORD = '514714'; // 上傳底圖 & 總覽 密碼
+  <script>
+  /* ========== (1) 設定：把這裡換成你的 GAS URL ========== */
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJdToNoRIc2q5-jT53c6jwcD6WNNDbNOBmhqE2ulDLmNDsBDo86hCVqj32AI9Fp53n/exec';
+  const PASSWORD = '0714'; // 上傳底圖保護用（僅 prompt）
 
-/* ========== (2) 狀態 ========== */
-const state = { rows: [], bgImages: [], selected: null, confirmChoice: null };
-
-/* ========== (3) 小工具 ========== */
-const $ = (id)=>document.getElementById(id);
-const showToast = (msg)=>{ const t=$('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1500) };
-const norm = (s)=> (s||'').toString().trim().toLowerCase();
-const unique = (arr)=>[...new Set(arr)];
-const by = (k)=>(a,b)=> (a[k]||'').localeCompare(b[k]||'', 'zh-Hant');
-
-/* Loading 標頭文字 */
-function setHeadLoading(isLoading){
-  const head = $('head'); if(!head) return;
-  head.innerHTML = isLoading
-    ? '資料載入中… / Loading roster… <span class="spinner" aria-hidden="true"></span>'
-    : '請於上方輸入「姓名或 IG」後搜尋 / Type NAME or IG to search';
-}
-
-/* ========== (4) 讀雲端名單（GAS） ========== */
-async function fetchRoster(){
-  try{
-    if(!WEB_APP_URL){ $('head').textContent='尚未設定資料端點 / No WEB_APP_URL'; return; }
-    setHeadLoading(true);
-    const res = await fetch(WEB_APP_URL + '?mode=roster', { method:'GET', cache:'no-store' });
-    if(!res.ok) throw new Error('network');
-    const data = await res.json();
-    state.rows = Array.isArray(data) ? data : (data.rows || []);
-    rebuildDatalists();
-    setHeadLoading(false);
-  }catch(e){
-    console.error(e);
-    $('head').textContent = '名單載入失敗 / Failed to load roster';
-  }
-}
-
-function rebuildDatalists(){
-  const dlN = $('nameList'); const dlI = $('igList');
-  dlN.innerHTML = ''; dlI.innerHTML = '';
-  unique(state.rows.map(r=>r.name).filter(Boolean).sort((a,b)=>a.localeCompare(b,'zh-Hant'))).forEach(v=>{
-    const o=document.createElement('option'); o.value=v; dlN.appendChild(o);
-  });
-  unique(state.rows.map(r=>r.ig).filter(Boolean).sort()).forEach(v=>{
-    const o=document.createElement('option'); o.value=v; dlI.appendChild(o);
-  });
-}
-
-/* ========== (5) 上傳邀請卡底圖（需密碼） ========== */
-$('btnUploadBG').addEventListener('click', ()=>{
-  const p = prompt('請輸入密碼 / Enter password');
-  if(p===null) return;
-  if(p!==PASSWORD){ showToast('密碼錯誤 / Wrong password'); return; }
-  $('fileBG').click();
-});
-$('fileBG').addEventListener('change', async (e)=>{
-  const files = Array.from(e.target.files||[]); if(!files.length) return;
-  state.bgImages = [];
-  for(const f of files){ const img = await fileToImage(f); state.bgImages.push(img); }
-  renderBGPreview(); showToast('邀請函底圖已載入 / Invitation background loaded'); e.target.value='';
-});
-function fileToImage(file){ return new Promise((res,rej)=>{ const img=new Image(); img.onload=()=>res(img); img.onerror=rej; img.src=URL.createObjectURL(file); }); }
-function renderBGPreview(){
-  const box=$('bgPreview'); box.innerHTML='';
-  state.bgImages.forEach(img=>{ const el=document.createElement('img'); el.src=img.src; box.appendChild(el);});
-}
-
-/* ========== (6) 搜尋 ========== */
-$('searchBtn').addEventListener('click', search);
-$('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter') search();});
-$('igInput').addEventListener('keydown',e=>{if(e.key==='Enter') search();});
-
-function search(){
-  const qn = norm($('nameInput').value);
-  const qi = norm($('igInput').value);
-  if(!state.rows.length){ showToast('雲端名單尚未就緒 / Roster not ready'); return; }
-
-  let sel = null;
-  if(qi) sel = state.rows.find(r=>norm(r.ig)===qi);
-  if(!sel && qn) sel = state.rows.find(r=>norm(r.name)===qn);
-
-  let rows=[]; let leader='';
-  if(sel){ leader = sel.leader; rows = state.rows.filter(r=>norm(r.leader)===norm(leader)); }
-  else{
-    const cand = state.rows.filter(r=> (qi && norm(r.ig).includes(qi)) || (qn && norm(r.name).includes(qn)) );
-    if(cand.length){ leader = cand[0].leader; rows = state.rows.filter(r=>norm(r.leader)===norm(leader)); }
-  }
-  renderList(rows, leader);
-}
-
-/* ========== (7) 列表渲染 ========== */
-function renderList(rows, leader){
-  const grid = $('grid'); grid.innerHTML='';
-  if(!rows || !rows.length){ $('head').textContent='查無資料 / No results'; return; }
-  $('head').innerHTML = leader
-    ? `桌長 / Leader：<b class="rbtext">${leader||'—'}</b>（${rows.length} 筆 / records）`
-    : `共 ${rows.length} 筆 / records`;
-
-  rows.sort((a,b)=> by('country')(a,b) || by('name')(a,b));
-  for(const r of rows){ grid.appendChild(renderPerson(r)); }
-}
-
-function renderPerson(r){
-  const card = document.createElement('div'); card.className='person';
-
-  const L1 = document.createElement('div'); L1.className='line';
-  const left1 = document.createElement('div'); left1.className='left namebar';
-  const flag = document.createElement('div'); flag.className='flag'; flag.textContent = r.flag || '—';
-  const ctry = document.createElement('span'); ctry.className='country'; ctry.textContent = (r.country||'—');
-  const personN = document.createElement('span'); personN.className='personN'; personN.textContent = (r.name||'—');
-  const ig = document.createElement('span'); ig.className='ig'; ig.textContent = (r.ig||'—');
-  left1.append(flag, ctry, personN, ig);
-  L1.append(left1);
-
-  const L2 = document.createElement('div'); L2.className='line';
-  const left2 = document.createElement('div'); left2.className='left'; left2.append(buildStatus(r.status));
-  const right2 = document.createElement('div'); right2.className='right';
-  if(r.link){
-    const a=document.createElement('a');
-    a.href=r.link; a.target='_blank'; a.rel='noopener noreferrer';
-    a.className='link-btn'; a.textContent='開啟連結 / Open link';
-    right2.appendChild(a);
-  }
-  L2.append(left2,right2);
-
-  const L3 = document.createElement('div'); L3.className='actions';
-  const btnC = document.createElement('button'); btnC.className='btn';
-  btnC.innerHTML='<span class="zh">確認</span><span class="en">Confirm</span>';
-  btnC.addEventListener('click',()=> openConfirm(r));
-
-  const btnD = document.createElement('button'); btnD.className='btn';
-  btnD.innerHTML='<span class="zh">邀請函下載</span><span class="en">Download Invite</span>';
-  btnD.addEventListener('click',()=> downloadInvite(r));
-
-  L3.append(btnC, btnD);
-  card.append(L1,L2,L3);
-  return card;
-}
-
-function buildStatus(status){
-  const box=document.createElement('div'); box.className='status';
-  const s = (status||'').toString().trim().toLowerCase();
-  let type='warn', zh='未回覆', en='Pending', iconType='warn';
-  if(s==='confirmed'){ type='ok'; zh='已確定訂位'; en='Confirmed'; iconType='ok'; }
-  else if(s==='cancelled'){ type='bad'; zh='取消參加'; en='Cancelled'; iconType='bad'; }
-  const badge=document.createElement('div'); badge.className='badge '+type; badge.innerHTML = svgIcon(iconType);
-  const lab=document.createElement('div'); lab.className='status-label';
-  lab.innerHTML = `<span class="zh">${zh}</span><span class="en">${en}</span>`;
-  box.append(badge,lab); return box;
-}
-
-function svgIcon(kind){
-  if(kind==='ok'){
-    return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ring" cx="12" cy="12" r="10.5" /><path class="glyph" d="M7 12.5l3 3 6-6" /></svg>`;
-  }
-  if(kind==='bad'){
-    return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ring" cx="12" cy="12" r="10.5" /><path class="glyph" d="M8 8l8 8M16 8l-8 8" /></svg>`;
-  }
-  return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ring" cx="12" cy="12" r="10.5" /><text class="glyph-text" x="12" y="12">?</text></svg>`;
-}
-
-/* ========== Confirm Modal ========== */
-const modal=$('confirmBackdrop'); const noteArea=$('noteArea'); const btnSubmit=$('confirmSubmit');
-document.querySelectorAll('.opt').forEach(el=> el.addEventListener('click',()=> selectOpt(el)) );
-$('confirmCancel').addEventListener('click', ()=> closeModal());
-function openConfirm(person){
-  state.selected = person; state.confirmChoice = null; noteArea.value='';
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('active'));
-  modal.style.display='flex';
-}
-function selectOpt(el){ document.querySelectorAll('.opt').forEach(o=>o.classList.remove('active')); el.classList.add('active'); state.confirmChoice = el.dataset.val; }
-function closeModal(){ modal.style.display='none'; }
-
-btnSubmit.addEventListener('click', async ()=>{
-  if(!state.confirmChoice){ showToast('請選擇一個選項 / Please choose an option'); return; }
-  const person = state.selected; if(!person){ closeModal(); return; }
-  const payload = {
-    action:'updateStatus',
-    item: person.item, number: person.number, country: person.country, flag: person.flag,
-    name: person.name, ig: person.ig, leader: person.leader, link: person.link,
-    status: state.confirmChoice, notes: noteArea.value.trim(), ts: Date.now()
+  /* ========== (2) 狀態 ========== */
+  const state = {
+    rows: [],          // 雲端 roster
+    bgImages: [],      // 上傳的邀請卡底圖
+    selected: null,    // 正在 confirm 的人
+    confirmChoice: null
   };
 
-  btnSubmit.disabled=true; btnSubmit.textContent='傳送中… / Sending…';
-  try{
-    const res = await fetch(WEB_APP_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload), mode:'cors', cache:'no-store' });
-    let ok=false; try{ const j=await res.json(); ok=!!j.ok || Array.isArray(j); }catch{ ok=res.ok; }
-    if(!ok) throw new Error('SERVER_NOK');
-    person.status = state.confirmChoice;
-    showToast('已送出並更新狀態 / Submitted & updated');
-    closeModal();
-    search();
-  }catch(err){
-    console.error(err);
-    showToast('送出失敗，請稍後再試 / Failed to submit');
-  }finally{ btnSubmit.disabled=false; btnSubmit.textContent='送出 / Submit'; }
-});
+  /* ========== (3) 小工具 ========== */
+  const $ = (id)=>document.getElementById(id);
+  const showToast = (msg)=>{ const t=$('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1500) };
+  const norm = (s)=> (s||'').toString().trim().toLowerCase();
+  const unique = (arr)=>[...new Set(arr)];
+  const by = (k)=>(a,b)=> (a[k]||'').localeCompare(b[k]||'');
 
-/* ========== 邀請卡下載 ========== */
-async function downloadInvite(person){
-  if(!state.bgImages.length){ showToast('請先上傳邀請卡底圖 / Upload background first'); return; }
-  const img = state.bgImages[0];
-  const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d');
-  const W = img.naturalWidth, H = img.naturalHeight; canvas.width=W; canvas.height=H;
-  ctx.drawImage(img,0,0,W,H);
-
-  const isH = W>=H;
-  const box = isH
-    ? { x: 0.60*W, y: 0.70*H, w: 0.35*W, h: 0.18*H }
-    : { x: 0.15*W, y: 0.60*H, w: 0.70*W, h: 0.16*H };
-
-  const text = `${person.item||''}-${person.number||''}`.trim();
-  const fontFamily = 'ui-sans-serif, system-ui, "Noto Sans TC", "Microsoft JhengHei"';
-  ctx.textBaseline='middle'; ctx.textAlign='center';
-  let fontSize = Math.min(box.h*0.6, box.w*0.22);
-  while(fontSize>10){
-    ctx.font = `800 ${fontSize}px ${fontFamily}`;
-    const w = ctx.measureText(text).width;
-    if(w<=box.w) break;
-    fontSize -= 1;
+  /* 簡易切換 head 載入中樣式（尾巴轉圈） */
+  function setHeadLoading(isLoading){
+    const head = $('head'); if(!head) return;
+    if(isLoading){
+      head.innerHTML = '資料載入中… / Loading roster… <span class="spinner" aria-hidden="true"></span>';
+    }else{
+      head.textContent = '請於上方輸入「姓名或 IG」後搜尋 / Type NAME or IG to search';
+    }
   }
-  const cx = box.x + box.w/2, cy = box.y + box.h/2;
-  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur=8; ctx.fillStyle = '#fff';
-  ctx.fillText(text, cx, cy);
 
+  /* ========== (4) 讀雲端名單（GAS） ========== */
+  async function fetchRoster(){
+    try{
+      if(!WEB_APP_URL){ $('head').textContent='尚未設定資料端點 / No WEB_APP_URL'; return; }
+      setHeadLoading(true);
+      const res = await fetch(WEB_APP_URL + '?mode=roster', { method:'GET', cache:'no-store' });
+      if(!res.ok) throw new Error('network');
+      const data = await res.json();
+      state.rows = Array.isArray(data) ? data : (data.rows || []);
+      rebuildDatalists();
+      renderStats();
+      setHeadLoading(false);
+    }catch(e){
+      console.error(e);
+      $('head').textContent = '名單載入失敗 / Failed to load roster';
+    }
+  }
+
+  function rebuildDatalists(){
+    const dlN = $('nameList'); const dlI = $('igList');
+    dlN.innerHTML = ''; dlI.innerHTML = '';
+    unique(state.rows.map(r=>r.name).filter(Boolean).sort()).forEach(v=>{
+      const o=document.createElement('option'); o.value=v; dlN.appendChild(o);
+    });
+    unique(state.rows.map(r=>r.ig).filter(Boolean).sort()).forEach(v=>{
+      const o=document.createElement('option'); o.value=v; dlI.appendChild(o);
+    });
+  }
+
+  /* ========== (5) 上傳邀請卡底圖（只有這個需要密碼） ========== */
+  document.getElementById('btnUploadBG').addEventListener('click', ()=>{
+    const p = prompt('請輸入密碼 / Enter password');
+    if(p===null) return;
+    if(p!==PASSWORD){ showToast('密碼錯誤 / Wrong password'); return; }
+    document.getElementById('fileBG').click();
+  });
+  document.getElementById('fileBG').addEventListener('change', async (e)=>{
+    const files = Array.from(e.target.files||[]); if(!files.length) return;
+    state.bgImages = [];
+    for(const f of files){
+      const img = await fileToImage(f);
+      state.bgImages.push(img);
+    }
+    renderBGPreview();
+    showToast('邀請函底圖已載入 / Invitation background loaded');
+    e.target.value='';
+  });
+  function fileToImage(file){
+    return new Promise((res,rej)=>{ const img=new Image(); img.onload=()=>res(img); img.onerror=rej; img.src=URL.createObjectURL(file); });
+  }
+  function renderBGPreview(){
+    const box=document.getElementById('bgPreview'); box.innerHTML='';
+    state.bgImages.forEach(img=>{ const el=document.createElement('img'); el.src=img.src; box.appendChild(el);});
+  }
+
+  /* ========== (6) 搜尋 ========== */
+  document.getElementById('searchBtn').addEventListener('click', search);
+  document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter') search();
+      renderStats();});
+  document.getElementById('igInput').addEventListener('keydown',e=>{if(e.key==='Enter') search();
+      renderStats();});
+
+  function search(){
+    const qn = norm(document.getElementById('nameInput').value);
+    const qi = norm(document.getElementById('igInput').value);
+    if(!state.rows.length){ showToast('雲端名單尚未就緒 / Roster not ready'); return; }
+
+    let sel = null;
+    if(qi) sel = state.rows.find(r=>norm(r.ig)===qi);
+    if(!sel && qn) sel = state.rows.find(r=>norm(r.name)===qn);
+
+    let rows=[]; let leader='';
+    if(sel){ leader = sel.leader; rows = state.rows.filter(r=>norm(r.leader)===norm(leader)); }
+    else{
+      const cand = state.rows.filter(r=> (qi && norm(r.ig).includes(qi)) || (qn && norm(r.name).includes(qn)) );
+      if(cand.length){ leader = cand[0].leader; rows = state.rows.filter(r=>norm(r.leader)===norm(leader)); }
+    }
+    renderList(rows, leader);
+  }
+
+  /* ========== (7) 列表渲染 ========== */
+  function renderList(rows, leader){
+    const grid = document.getElementById('grid'); grid.innerHTML='';
+    if(!rows || !rows.length){ document.getElementById('head').textContent='查無資料 / No results'; return; }
+    document.getElementById('head').innerHTML = leader
+      ? `桌長 / Leader：<b class="rbtext">${leader||'—'}</b>（${rows.length} 筆 / records）`
+      : `共 ${rows.length} 筆 / records`;
+
+    rows.sort((a,b)=> by('country')(a,b) || by('name')(a,b));
+    for(const r of rows){ grid.appendChild(renderPerson(r)); }
+  }
+
+  function renderPerson(r){
+    const card = document.createElement('div'); card.className='person';
+
+    /* 第一行：旗 / 國家 / 姓名 / IG（桌機可自動換行顯示完整） */
+    const L1 = document.createElement('div'); L1.className='line';
+    const left1 = document.createElement('div'); left1.className='left namebar';
+    const flag = document.createElement('div'); flag.className='flag'; flag.textContent = r.flag || '—';
+    const ctry = document.createElement('span'); ctry.className='country'; ctry.textContent = (r.country||'—');
+    const personN = document.createElement('span'); personN.className='personN'; personN.textContent = (r.name||'—');
+    const ig = document.createElement('span'); ig.className='ig'; ig.textContent = (r.ig||'—');
+    left1.append(flag, ctry, personN, ig);
+    L1.append(left1);
+
+    /* 第二行（左：狀態；右：開啟連結） */
+    const L2 = document.createElement('div'); L2.className='line';
+    const left2 = document.createElement('div'); left2.className='left'; left2.append(buildStatus(r.status));
+    const right2 = document.createElement('div'); right2.className='right';
+    
+if(r.link){
   const a=document.createElement('a');
-  const safeName = (person.name||'guest').replace(/[^\w\u4e00-\u9fa5-]+/g,'_');
-  a.download = `${person.item||''}-${person.number||''}-${safeName}.png`;
-  a.href = canvas.toDataURL('image/png'); a.click();
+  a.href=r.link; a.target='_blank'; a.rel='noopener noreferrer';
+  a.className='link-btn ig-btn';
+  const img=document.createElement('img');
+  img.src='pngsucai_1605688_ec16ce.png';
+  img.alt='Instagram';
+  img.className='ig-icon';
+  a.appendChild(img);
+  right2.appendChild(a);
 }
 
-/* ========== Overview（需密碼 514714） ========== */
-const ovrBtn = document.getElementById('btnOverview');
-const ovrBackdrop = document.getElementById('ovrBackdrop');
-const ovrCols = document.getElementById('ovrCols');
-const ovrClose = document.getElementById('ovrClose');
+    L2.append(left2,right2);
 
-ovrBtn.addEventListener('click', ()=>{
-  const p = prompt('請輸入總覽密碼 / Enter overview password');
-  if(p===null) return;
-  if(p!==PASSWORD){ showToast('密碼錯誤 / Wrong password'); return; }
-  buildOverview(); ovrBackdrop.style.display='flex';
-});
-ovrClose.addEventListener('click', ()=> ovrBackdrop.style.display='none');
-ovrBackdrop.addEventListener('click', (e)=>{ if(e.target===ovrBackdrop) ovrBackdrop.style.display='none'; });
+    /* 第三行：Confirm / Download（小尺寸＋中英分行） */
+    const L3 = document.createElement('div'); L3.className='actions';
+    const btnC = document.createElement('button'); btnC.className='btn';
+    btnC.innerHTML='<span class="zh">確認</span><span class="en">Confirm</span>';
+    btnC.addEventListener('click',()=> openConfirm(r));
 
+    const btnD = document.createElement('button'); btnD.className='btn';
+    btnD.innerHTML='<span class="zh">邀請函下載</span><span class="en">Download Invite</span>';
+    btnD.addEventListener('click',()=> downloadInvite(r));
+
+    L3.append(btnC, btnD);
+    card.append(L1,L2,L3);
+    return card;
+  }
+
+  function buildStatus(status){
+    const box=document.createElement('div'); box.className='status';
+    const s = (status||'').toString().trim().toLowerCase();
+    let type='warn', zh='未回覆', en='Pending', iconType='warn';
+    if(s==='confirmed'){ type='ok'; zh='已確定訂位'; en='Confirmed'; iconType='ok'; }
+    else if(s==='cancelled'){ type='bad'; zh='取消參加'; en='Cancelled'; iconType='bad'; }
+    const badge=document.createElement('div'); badge.className='badge '+type; badge.innerHTML = svgIcon(iconType);
+    const lab=document.createElement('div'); lab.className='status-label';
+    lab.innerHTML = `<span class="zh">${zh}</span><span class="en">${en}</span>`;
+    box.append(badge,lab); return box;
+  }
+
+  /* 高質感圓形圖標：ok=勾、warn=問號、bad=叉（厚外圈＋深色內心＋白色符號） */
+  function svgIcon(kind){
+    if(kind==='ok'){
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="ring" cx="12" cy="12" r="10.5" />
+          <path class="glyph" d="M7 12.5l3 3 6-6" />
+        </svg>
+      `;
+    }
+    if(kind==='bad'){
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="ring" cx="12" cy="12" r="10.5" />
+          <path class="glyph" d="M8 8l8 8M16 8l-8 8" />
+        </svg>
+      `;
+    }
+    /* warn（預設） */
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="ring" cx="12" cy="12" r="10.5" />
+        <text class="glyph-text" x="12" y="12">?</text>
+      </svg>
+    `;
+  }
+
+  /* ========== (8) Confirm Modal ========== */
+  const modal=document.getElementById('confirmBackdrop');
+  const noteArea=document.getElementById('noteArea');
+  const btnSubmit=document.getElementById('confirmSubmit');
+  document.querySelectorAll('.opt').forEach(el=> el.addEventListener('click',()=> selectOpt(el)) );
+  document.getElementById('confirmCancel').addEventListener('click', ()=> closeModal());
+
+  function openConfirm(person){
+    state.selected = person; state.confirmChoice = null; noteArea.value='';
+    document.querySelectorAll('.opt').forEach(o=>o.classList.remove('active'));
+    modal.style.display='flex';
+  }
+  function selectOpt(el){
+    document.querySelectorAll('.opt').forEach(o=>o.classList.remove('active'));
+    el.classList.add('active'); state.confirmChoice = el.dataset.val;
+  }
+  function closeModal(){ modal.style.display='none'; }
+
+  btnSubmit.addEventListener('click', async ()=>{
+    if(!state.confirmChoice){ showToast('請選擇一個選項 / Please choose an option'); return; }
+    const person = state.selected; if(!person){ closeModal(); return; }
+    const payload = {
+      action:'updateStatus',
+      item: person.item, number: person.number, country: person.country, flag: person.flag,
+      name: person.name, ig: person.ig, leader: person.leader, link: person.link,
+      status: state.confirmChoice, notes: noteArea.value.trim(), ts: Date.now()
+    };
+
+    btnSubmit.disabled=true; btnSubmit.textContent='傳送中… / Sending…';
+    try{
+      const res = await fetch(WEB_APP_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload), mode:'cors', cache:'no-store' });
+      let ok=false; try{ const j=await res.json(); ok=!!j.ok || Array.isArray(j); }catch{ ok=res.ok; }
+      if(!ok) throw new Error('SERVER_NOK');
+      person.status = state.confirmChoice;
+      showToast('已送出並更新狀態 / Submitted & updated');
+      closeModal();
+      search();
+      renderStats();
+    }catch(err){
+      console.error(err);
+      showToast('送出失敗，請稍後再試 / Failed to submit');
+    }finally{ btnSubmit.disabled=false; btnSubmit.textContent='送出 / Submit'; }
+  });
+
+  /* ========== (9) 邀請卡下載：item-number 置於安全區（直/橫自適） ========== */
+  async function downloadInvite(person){
+    if(!state.bgImages.length){ showToast('請先上傳邀請卡底圖 / Upload background first'); return; }
+    const img = state.bgImages[0];
+    const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d');
+    const W = img.naturalWidth, H = img.naturalHeight; canvas.width=W; canvas.height=H;
+    ctx.drawImage(img,0,0,W,H);
+
+    const isH = W>=H;
+    const box = isH
+      ? { x: 0.60*W, y: 0.70*H, w: 0.35*W, h: 0.18*H }
+      : { x: 0.15*W, y: 0.60*H, w: 0.70*W, h: 0.16*H };
+
+    const text = `${person.item||''}-${person.number||''}`.trim();
+    const fontFamily = 'ui-sans-serif, system-ui, "Noto Sans TC", "Microsoft JhengHei"';
+    ctx.textBaseline='middle'; ctx.textAlign='center';
+    let fontSize = Math.min(box.h*0.6, box.w*0.22);
+    while(fontSize>10){
+      ctx.font = `800 ${fontSize}px ${fontFamily}`;
+      const w = ctx.measureText(text).width;
+      if(w<=box.w) break;
+      fontSize -= 1;
+    }
+    const cx = box.x + box.w/2, cy = box.y + box.h/2;
+    ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur=8; ctx.fillStyle = '#fff';
+    ctx.fillText(text, cx, cy);
+
+    const a=document.createElement('a');
+    const safeName = (person.name||'guest').replace(/[^\w\u4e00-\u9fa5-]+/g,'_');
+    a.download = `${person.item||''}-${person.number||''}-${safeName}.png`;
+    a.href = canvas.toDataURL('image/png'); a.click();
+  }
+
+  /* ========== (10) 啟動 ========== */
+  function init(){ fetchRoster(); }
+  init();
+  
+  function renderStats(){
+    const ok = state.rows.filter(r => (r.status||'').toString().trim().toLowerCase()==='confirmed').length;
+    const bad = state.rows.filter(r => (r.status||'').toString().trim().toLowerCase()==='cancelled').length;
+    const warn = state.rows.length - ok - bad;
+    const elOk = document.getElementById('statOk');
+    const elWarn = document.getElementById('statWarn');
+    const elBad = document.getElementById('statBad');
+    if(elOk) elOk.textContent = ok;
+    if(elWarn) elWarn.textContent = warn;
+    if(elBad) elBad.textContent = bad;
+  }
+
+
+/* ===== v25c：總覽功能（僅左側按鈕；欄寬 30–120px） ===== */
+const OVERVIEW_PWD = '514714';
+const pendingLeader = new Map();
+const hiddenLeaders = new Set();
+let ovOpen = false;
+
+const elOvBack   = document.getElementById('overviewBackdrop');
+const elOvMask   = document.getElementById('overviewMask');
+const elOvClose  = document.getElementById('ovClose');
+const elOvSave   = document.getElementById('ovSave');
+const elOvScroll = document.getElementById('ovScroller');
+const elOvRow    = document.getElementById('ovRow');
+const elOvHiddenBar  = document.getElementById('ovHiddenBar');
+const elOvHiddenList = document.getElementById('ovHiddenList');
+const elOvHiddenCnt  = document.getElementById('ovHiddenCount');
+const elOvUnhideAll  = document.getElementById('ovUnhideAll');
+const elOvColWidth   = document.getElementById('ovColWidth');
+const elOvApplyWidth = document.getElementById('ovApplyWidth');
+
+function showOverviewWithPwd(){
+  const pwd = window.prompt('請輸入總覽密碼 / Enter password');
+  if(pwd === OVERVIEW_PWD){ openOverview(); }
+  else if(pwd !== null){ showToast && showToast('密碼錯誤 / Wrong password'); }
+}
+function openOverview(){
+  elOvBack.style.display='block'; ovOpen=true;
+  elOvScroll.style.display='block';
+  elOvSave.disabled = true;
+  applyOvWidth();
+  buildOverview();
+}
+function closeOverview(){
+  elOvBack.style.display='none'; ovOpen=false; pendingLeader.clear(); elOvSave.disabled = true;
+}
+const btnLeftOV = document.getElementById('btnOverviewLeft');
+if(btnLeftOV) btnLeftOV.addEventListener('click', showOverviewWithPwd);
+elOvMask.addEventListener('click', closeOverview);
+elOvClose.addEventListener('click', closeOverview);
+
+function clamp(n, lo, hi){ return Math.max(lo, Math.min(hi, n)); }
+function applyOvWidth(){
+  const v = clamp(parseInt(elOvColWidth.value||'100',10), 30, 120);
+  elOvColWidth.value = String(v);
+  elOvRow.style.gridAutoColumns = v + 'px';
+}
+elOvApplyWidth.addEventListener('click', applyOvWidth);
+
+/* Build overview */
 function buildOverview(){
-  if(!state.rows.length){ showToast('名單尚未載入 / Roster not ready'); return; }
+  if(!Array.isArray(state.rows) || !state.rows.length){
+    elOvRow.innerHTML = '<div style="color:#9AA4AF;padding:12px">尚未載入名單</div>';
+    elOvHiddenBar.style.display='none';
+    return;
+  }
   const groups = {};
   for(const r of state.rows){
-    const key = (r.leader||'—').toString().trim();
-    if(!groups[key]) groups[key] = [];
-    groups[key].push(r);
+    const key = (r.leader || '—').trim();
+    (groups[key] ||= []).push(r);
   }
-  const leaders = Object.keys(groups).sort((a,b)=> a.localeCompare(b,'zh-Hant'));
-  ovrCols.innerHTML='';
-  for(const L of leaders){
-    const col = document.createElement('div'); col.className='ovr-col';
-    const title = document.createElement('div'); title.className='ovr-leader'; title.textContent=L || '—';
-    col.appendChild(title);
-    const members = groups[L].slice().sort((a,b)=> (a.country||'').localeCompare(b.country||'') || (a.name||'').localeCompare(b.name||'','zh-Hant'));
-    for(const m of members){
-      const item = document.createElement('div'); item.className='ovr-item';
-      const flag = document.createElement('span'); flag.className='flag'; flag.textContent = m.flag || '';
-      const name = document.createElement('span'); name.textContent = m.name || '—';
-      item.append(flag, name);
-      col.appendChild(item);
-    }
-    ovrCols.appendChild(col);
+  elOvRow.innerHTML = '';
+  for(const [leader, members] of Object.entries(groups)){
+    if(hiddenLeaders.has(leader)) continue;
+    const card = document.createElement('div');
+    card.className='table-card';
+    card.dataset.leader = leader;
+    card.addEventListener('dragover', (e)=>{ e.preventDefault(); card.classList.add('drag-hover'); });
+    card.addEventListener('dragleave', ()=> card.classList.remove('drag-hover'));
+    card.addEventListener('drop', (e)=>{
+      e.preventDefault(); card.classList.remove('drag-hover');
+      const payload = JSON.parse(e.dataTransfer.getData('text/plain') || '{}');
+      if(!payload || !payload.ukey) return;
+      const srcEl = document.querySelector(`[data-ukey="${payload.ukey}"]`);
+      if(srcEl && srcEl.parentElement !== list){ list.appendChild(srcEl); }
+      pendingLeader.set(payload.ukey, leader);
+      elOvSave.disabled = pendingLeader.size === 0;
+    });
+
+    const head = document.createElement('div'); head.className='table-head';
+    const left = document.createElement('div'); left.style.display='flex'; left.style.alignItems='center'; left.style.gap='6px';
+    const title = document.createElement('div'); title.className='table-title'; title.textContent = leader || '—';
+    const hideBtn = document.createElement('button'); hideBtn.className='ov-btn'; hideBtn.textContent='隱藏';
+    hideBtn.style.padding='4px 8px'; hideBtn.style.fontSize='11px';
+    hideBtn.addEventListener('click', ()=>{ hiddenLeaders.add(leader); buildOverview(); renderHiddenBar(); });
+    left.append(title, hideBtn);
+
+    const meta = document.createElement('div'); meta.className='table-meta'; meta.textContent = `${members.length} people`;
+    head.append(left, meta);
+
+    const list = document.createElement('div');
+    members.forEach(m=>{
+      const row = document.createElement('div'); row.className='member';
+      const ukey = `${m.item||''}-${m.number||''}-${(m.name||'').trim()}`;
+      row.draggable = true;
+      row.dataset.ukey = ukey;
+      row.addEventListener('dragstart',(e)=>{
+        e.dataTransfer.setData('text/plain', JSON.stringify({ ukey }));
+      });
+      const flag = document.createElement('div'); flag.className='m-flag'; flag.textContent = m.flag || '—';
+      const name = document.createElement('div'); name.className='m-name'; name.textContent = (m.name || '—');
+      row.append(flag, name);
+      list.appendChild(row);
+    });
+
+    card.append(head, list);
+    elOvRow.appendChild(card);
   }
+  renderHiddenBar();
 }
 
-/* 啟動 */
-function init(){ fetchRoster(); }
-init();
+function renderHiddenBar(){
+  const count = hiddenLeaders.size;
+  elOvHiddenCnt.textContent = String(count);
+  if(count===0){
+    elOvHiddenBar.style.display='none';
+    elOvHiddenList.innerHTML='';
+    return;
+  }
+  elOvHiddenBar.style.display='flex';
+  elOvHiddenList.innerHTML='';
+  [...hiddenLeaders].forEach(leader=>{
+    const b = document.createElement('span');
+    b.className='badge btn';
+    b.textContent = leader || '—';
+    b.title = '點擊取消隱藏';
+    b.addEventListener('click', ()=>{
+      hiddenLeaders.delete(leader);
+      buildOverview();
+      renderHiddenBar();
+    });
+    elOvHiddenList.appendChild(b);
+  });
+}
+elOvUnhideAll.addEventListener('click', ()=>{
+  hiddenLeaders.clear();
+  buildOverview();
+  renderHiddenBar();
+});
+
+/* Save：批次回寫（需後端 action: bulkUpdateLeader） */
+elOvSave.addEventListener('click', async ()=>{
+  if(pendingLeader.size===0) return;
+  try{
+    elOvSave.disabled = true; elOvSave.textContent='Saving…';
+    const changes = [];
+    for(const [ukey, newLeader] of pendingLeader.entries()){
+      const row = state.rows.find(r=> `${r.item||''}-${r.number||''}-${(r.name||'').trim()}` === ukey );
+      if(!row) continue;
+      if((row.leader||'') === newLeader) continue;
+      changes.push({
+        item:row.item, number:row.number, name:row.name, ig:row.ig,
+        country:row.country, flag:row.flag, oldLeader:row.leader, newLeader
+      });
+    }
+    if(changes.length===0){ showToast && showToast('沒有變更'); elOvSave.textContent='Save'; return; }
+
+    const payload = { action:'bulkUpdateLeader', changes, ts:Date.now() };
+    const res = await fetch(WEB_APP_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload),
+      mode:'cors', cache:'no-store'
+    });
+    let ok=false; try{ const j=await res.json(); ok=!!j.ok || Array.isArray(j); }catch{ ok=res.ok; }
+    if(!ok) throw new Error('SERVER_NOK');
+
+    for(const c of changes){
+      const row = state.rows.find(r=> r.item===c.item && r.number===c.number && r.name===c.name);
+      if(row) row.leader = c.newLeader;
+    }
+    pendingLeader.clear();
+    showToast && showToast('已儲存變更 / Saved');
+    elOvSave.textContent='Save';
+    buildOverview();
+    try{ search(); }catch{}
+  }catch(err){
+    console.error(err);
+    showToast && showToast('儲存失敗 / Save failed');
+    elOvSave.textContent='Save';
+    elOvSave.disabled = false;
+  }
+});
+
 </script>
 </body>
 </html>

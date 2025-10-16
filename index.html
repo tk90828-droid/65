@@ -427,27 +427,35 @@
 }
 
 
-/* ===== v25e：總覽美化（隱藏按鈕極簡、隱藏列改彩虹圓點） ===== */
-.overview-wrap.left{  position:fixed; left:12px;  bottom:12px; z-index:31; opacity:.95; display:flex; gap:10px; align-items:center }
+/* ===== v25f：總覽（更小按鈕、左右工具列、眼睛圖示、回寫強化） ===== */
+.overview-wrap.left{ position:fixed; left:12px; bottom:12px; z-index:31; opacity:.95; display:flex; gap:10px; align-items:center }
 .raku-btn{ width:auto; height:auto; border:none; background:transparent; padding:0; cursor:pointer }
-.raku-btn img{ height:80px; display:block; object-fit:contain }
+.raku-btn img{ height:72px; display:block; object-fit:contain }
 
 #overviewBackdrop{ position:fixed; inset:0; display:none; z-index:60 }
 #overviewMask{ position:absolute; inset:0; background:rgba(0,0,0,.6) }
 #overviewPanel{
   position:absolute; inset:6% 3% 9% 3%;
-  background:#0f1117; border:1px solid #2b3244; border-radius:16px;
+  background:#0f1117; border:1px solid #2b3244; border-radius:14px;
   box-shadow:0 20px 60px rgba(0,0,0,.5);
   display:flex; flex-direction:column; overflow:hidden;
 }
-.ov-head{ display:flex; align-items:center; justify-content:space-between; padding:10px 14px; gap:8px; flex-wrap:wrap }
-.ov-title{ font-weight:900; font-size:18px }
-.ov-tools{ display:flex; gap:8px; align-items:center; flex-wrap:wrap }
-.ov-btn{ padding:6px 10px; border-radius:10px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb; font-weight:800; cursor:pointer }
-.ov-btn.primary{ border:0; background:linear-gradient(90deg,#a7f3d0,#93c5fd); color:#0b0c10; font-weight:900 }
+.ov-head{ display:flex; align-items:center; justify-content:space-between; padding:8px 12px; gap:6px; flex-wrap:wrap }
+.ov-title{ font-weight:900; font-size:16px }
+.ov-tools{ display:flex; align-items:center; justify-content:space-between; width:100%; gap:8px }
+.ov-tools-left, .ov-tools-right{ display:flex; gap:6px; align-items:center; flex-wrap:wrap }
 
-/* 可調欄寬（JS 控制 grid-auto-columns），預設 100px */
-.ov-scroller{ flex:1; overflow:auto; padding:12px; scroll-snap-type:x mandatory; white-space:nowrap }
+.ov-btn{ padding:4px 8px; border-radius:9px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb; font-weight:700; cursor:pointer; font-size:12px }
+.ov-btn.primary{ border:0; background:linear-gradient(90deg,#a7f3d0,#93c5fd); color:#0b0c10; font-weight:900 }
+.ov-btn.icon{ width:22px; height:22px; padding:0; display:grid; place-items:center; }
+
+/* 欄寬控制（30–120px） */
+.ctrl{ display:flex; gap:6px; align-items:center }
+.ctrl label{ font-size:12px; color:#9AA4AF }
+.ctrl input[type="number"]{ width:72px; padding:4px 6px; border-radius:9px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb; font-size:12px }
+
+/* Grid（預設 100px，JS 會改） */
+.ov-scroller{ flex:1; overflow:auto; padding:10px; scroll-snap-type:x mandatory; white-space:nowrap }
 .ov-row{ display:inline-grid; grid-auto-flow:column; grid-auto-columns:100px; gap:8px }
 
 .table-card{
@@ -456,7 +464,7 @@
   background:#10131A; border:1px solid #2b3244; border-radius:12px; padding:6px;
   min-height:110px; display:flex; flex-direction:column; gap:6px;
 }
-.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px; padding-top:10px }
+.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px; padding-top:8px }
 .table-title{
   font-weight:900; font-size:12px;
   background:linear-gradient(90deg,#ff5f6d,#ffc371,#9be15d,#00e3ae,#45aaf2,#9b59b6);
@@ -464,17 +472,15 @@
 }
 .table-meta{ font-size:10px; color:#9AA4AF }
 
-/* 更低干擾的隱藏按鈕：卡片上緣正上方、半透明小圓點 + hover 顯示 X */
-.hide-dot{
-  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
-  width:18px; height:18px; border-radius:999px;
-  background:rgba(255,255,255,.12); border:1px solid #2b3244;
-  cursor:pointer; display:grid; place-items:center; font-size:12px; color:#e5e7eb;
-  transition:transform .12s ease, background .12s ease;
+/* 小型「眼睛」隱藏按鈕：卡片上方正中，極小尺寸 */
+.hide-eye{
+  position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+  width:16px; height:16px; border-radius:999px; border:1px solid #2b3244;
+  background:#0f1117; color:#e5e7eb; font-size:11px; line-height:14px; text-align:center;
+  cursor:pointer; opacity:.9;
 }
-.hide-dot::before{ content:''; }
-.hide-dot:hover{ transform:translateX(-50%) scale(1.06); background:rgba(255,255,255,.18) }
-.hide-dot:hover::before{ content:'×'; line-height:1; }
+.hide-eye::before{ content:'👁'; }
+.hide-eye:hover{ transform:translateX(-50%) scale(1.05); }
 
 .member{
   display:flex; align-items:center; gap:4px; padding:3px 4px; border-radius:8px;
@@ -482,32 +488,17 @@
   user-select:none;
 }
 .member .m-flag{ font-size:12px; flex:0 0 auto }
-.member .m-name{
-  font-size:11px; color:#E5E7EB; font-weight:800;
-  max-width:86px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
+.member .m-name{ font-size:11px; color:#E5E7EB; font-weight:800; max-width:86px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
 .table-card.drag-hover{ outline:2px dashed #93c5fd; outline-offset:2px }
 
-/* 隱藏列：彩虹圓點清單 */
-#ovHiddenBar{ display:none; border-top:1px solid #2b3244; background:#0f1117; padding:8px 12px; gap:8px; }
-#ovHiddenTop{ display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:6px }
-#ovHiddenList{ display:flex; flex-wrap:wrap; gap:14px; max-height:96px; overflow:auto; padding:4px 2px 8px }
+/* 隱藏列：彩虹圓點（更緊湊） */
+#ovHiddenBar{ display:none; border-top:1px solid #2b3244; background:#0f1117; padding:8px 10px; gap:6px; }
+#ovHiddenTop{ display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap; margin-bottom:4px }
+#ovHiddenList{ display:flex; flex-wrap:wrap; gap:12px; max-height:90px; overflow:auto; padding:2px 0 6px }
 
 .hchip{ position:relative; display:flex; align-items:center; gap:6px }
-.hchip .dot{
-  width:16px; height:16px; border-radius:999px; flex:0 0 auto;
-  box-shadow:0 0 0 1px #2b3244 inset, 0 2px 8px rgba(0,0,0,.35);
-  cursor:pointer;
-}
-.hchip .label{
-  font-size:11px; color:#9AA4AF; max-width:120px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  transform:translateY(1px);
-}
-
-/* 欄寬控制（30–120px） */
-.ctrl{ display:flex; gap:6px; align-items:center }
-.ctrl label{ font-size:12px; color:#9AA4AF }
-.ctrl input[type="number"]{ width:88px; padding:6px 8px; border-radius:10px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb }
+.hchip .dot{ width:14px; height:14px; border-radius:999px; flex:0 0 auto; box-shadow:0 0 0 1px #2b3244 inset, 0 2px 8px rgba(0,0,0,.35); cursor:pointer; }
+.hchip .label{ font-size:10px; color:#9AA4AF; max-width:110px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transform:translateY(1px); }
 
 </style>
 </head>
@@ -578,13 +569,17 @@
     <div class="ov-head">
       <div class="ov-title">桌次總覽（Flag + Name）</div>
       <div class="ov-tools">
-        <div class="ctrl">
-          <label for="ovColWidth">欄寬(px)</label>
-          <input id="ovColWidth" type="number" min="30" max="120" step="2" value="100" />
-          <button id="ovApplyWidth" class="ov-btn">套用</button>
+        <div class="ov-tools-left">
+          <div class="ctrl">
+            <label for="ovColWidth">欄寬(px)</label>
+            <input id="ovColWidth" type="number" min="30" max="120" step="2" value="100" />
+            <button id="ovApplyWidth" class="ov-btn">套用</button>
+          </div>
         </div>
-        <button id="ovClose" class="ov-btn">Close</button>
-        <button id="ovSave" class="ov-btn primary" disabled>Save</button>
+        <div class="ov-tools-right">
+          <button id="ovClose" class="ov-btn">Close</button>
+          <button id="ovSave" class="ov-btn primary">Save</button>
+        </div>
       </div>
     </div>
     <div id="ovScroller" class="ov-scroller" style="display:none">
@@ -593,7 +588,7 @@
     <div id="ovHiddenBar">
       <div id="ovHiddenTop">
         <div class="hint" style="color:#9AA4AF;font-size:12px">已隱藏：<span id="ovHiddenCount">0</span></div>
-        <div class="ctrl"><button id="ovUnhideAll" class="ov-btn">取消全部隱藏</button></div>
+        <div class="ov-tools-right"><button id="ovUnhideAll" class="ov-btn">取消全部隱藏</button></div>
       </div>
       <div id="ovHiddenList"></div>
     </div>
@@ -924,7 +919,7 @@ if(r.link){
   }
 
 
-/* ===== v25e：總覽功能（彩虹隱藏列、輕量隱藏點、Save 回寫強化） ===== */
+/* ===== v25f：總覽功能（回寫強化 + 小眼睛 + 左右工具列） ===== */
 const OVERVIEW_PWD = '514714';
 const pendingLeader = new Map();
 const hiddenLeaders = new Set();
@@ -971,10 +966,7 @@ function applyOvWidth(){
 }
 elOvApplyWidth.addEventListener('click', applyOvWidth);
 
-/* Rainbow palette for hidden chips */
-const RAINBOW = ['#EF4444','#F59E0B','#FACC15','#22C55E','#3B82F6','#8B5CF6'];
-
-/* Build overview (hide-dot centered above title) */
+/* Build overview */
 function buildOverview(){
   if(!Array.isArray(state.rows) || !state.rows.length){
     elOvRow.innerHTML = '<div style="color:#9AA4AF;padding:12px">尚未載入名單</div>';
@@ -1004,12 +996,11 @@ function buildOverview(){
       elOvSave.disabled = pendingLeader.size === 0;
     });
 
-    // subtle hide dot on top-center
-    const hideDot = document.createElement('button');
-    hideDot.className='hide-dot';
-    hideDot.title='隱藏此桌';
-    hideDot.addEventListener('click', ()=>{ hiddenLeaders.add(leader); buildOverview(); renderHiddenBar(); });
-    card.appendChild(hideDot);
+    // tiny eye
+    const hideEye = document.createElement('button');
+    hideEye.className='hide-eye'; hideEye.title='隱藏此桌';
+    hideEye.addEventListener('click', ()=>{ hiddenLeaders.add(leader); buildOverview(); renderHiddenBar(); });
+    card.appendChild(hideEye);
 
     const head = document.createElement('div'); head.className='table-head';
     const title = document.createElement('div'); title.className='table-title'; title.textContent = leader || '—';
@@ -1037,7 +1028,8 @@ function buildOverview(){
   renderHiddenBar();
 }
 
-/* Render rainbow hidden chips */
+/* Hidden bar rainbow */
+const RAINBOW = ['#EF4444','#F59E0B','#FACC15','#22C55E','#3B82F6','#8B5CF6'];
 function renderHiddenBar(){
   const count = hiddenLeaders.size;
   elOvHiddenCnt.textContent = String(count);
@@ -1048,87 +1040,96 @@ function renderHiddenBar(){
   }
   elOvHiddenBar.style.display='block';
   elOvHiddenList.innerHTML='';
-  let i = 0;
+  let i=0;
   [...hiddenLeaders].forEach(leader=>{
-    const chip = document.createElement('div');
-    chip.className='hchip';
-    const dot = document.createElement('div');
-    dot.className='dot';
-    dot.style.background = RAINBOW[i % RAINBOW.length];
-    dot.title = '點擊恢復此桌';
-    dot.addEventListener('click', ()=>{
-      hiddenLeaders.delete(leader);
-      buildOverview();
-      renderHiddenBar();
-    });
-    const lab = document.createElement('div');
-    lab.className='label';
-    lab.textContent = leader || '—';
-    chip.append(dot, lab);
-    elOvHiddenList.appendChild(chip);
-    i++;
+    const chip = document.createElement('div'); chip.className='hchip';
+    const dot = document.createElement('div'); dot.className='dot'; dot.style.background = RAINBOW[i % RAINBOW.length];
+    dot.title='點擊恢復此桌';
+    dot.addEventListener('click', ()=>{ hiddenLeaders.delete(leader); buildOverview(); renderHiddenBar(); });
+    const lab = document.createElement('div'); lab.className='label'; lab.textContent = leader || '—';
+    chip.append(dot, lab); elOvHiddenList.appendChild(chip); i++;
   });
 }
-elOvUnhideAll.addEventListener('click', ()=>{
-  hiddenLeaders.clear();
-  buildOverview();
-  renderHiddenBar();
-});
+elOvUnhideAll.addEventListener('click', ()=>{ hiddenLeaders.clear(); buildOverview(); renderHiddenBar(); });
 
-/* Save：批次回寫（加上後備方案：若 bulk 失敗，逐筆嘗試 legacy action） */
+/* SAVE：嘗試多種回寫協定以確保 roster 更新 */
+async function tryBulkJSON(changes){
+  const res = await fetch(WEB_APP_URL, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action:'bulkUpdateLeader', sheet:'roster', changes, ts:Date.now() }),
+    mode:'cors', cache:'no-store'
+  });
+  let j=null; try{ j = await res.json(); }catch{}
+  return (j && (j.ok || Array.isArray(j))) || res.ok;
+}
+async function tryBulkText(changes){
+  const res = await fetch(WEB_APP_URL, {
+    method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({ action:'bulkUpdateLeader', sheet:'roster', changes, ts:Date.now() }),
+    mode:'cors', cache:'no-store'
+  });
+  let j=null; try{ j = await res.json(); }catch{}
+  return (j && (j.ok || Array.isArray(j))) || res.ok;
+}
+async function tryRosterBatch(changes){
+  const res = await fetch(WEB_APP_URL, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action:'updateRoster', data: changes, ts:Date.now() }),
+    mode:'cors', cache:'no-store'
+  });
+  let j=null; try{ j = await res.json(); }catch{}
+  return (j && (j.ok || Array.isArray(j))) || res.ok;
+}
+async function tryPerRow(changes){
+  const results = await Promise.all(changes.map(c=> fetch(WEB_APP_URL, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action:'updateLeader', sheet:'roster', item:c.item, number:c.number, name:c.name, newLeader:c.newLeader, ts:Date.now() }),
+    mode:'cors', cache:'no-store'
+  }).then(r=>r.ok).catch(()=>false)));
+  return results.some(Boolean);
+}
+
 elOvSave.addEventListener('click', async ()=>{
   if(pendingLeader.size===0) return;
+  // pack changes
   const changes = [];
   for(const [ukey, newLeader] of pendingLeader.entries()){
     const row = state.rows.find(r=> `${r.item||''}-${r.number||''}-${(r.name||'').trim()}` === ukey );
     if(!row) continue;
     if((row.leader||'') === newLeader) continue;
-    changes.push({ item:row.item, number:row.number, name:row.name, ig:row.ig, country:row.country, flag:row.flag, oldLeader:row.leader, newLeader });
+    changes.push({
+      item:row.item, number:row.number, name:row.name, ig:row.ig, country:row.country, flag:row.flag,
+      oldLeader:row.leader, newLeader
+    });
   }
   if(changes.length===0){ if(typeof showToast==='function') showToast('沒有變更'); return; }
 
-  elOvSave.disabled = true; const txtOld = elOvSave.textContent; elOvSave.textContent='Saving…';
+  const old = elOvSave.textContent; elOvSave.textContent='Saving…'; elOvSave.disabled = true;
+
+  let ok = false;
   try{
-    // 1) Try bulk
-    let ok = false;
-    try{
-      const res = await fetch(WEB_APP_URL, {
-        method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body: JSON.stringify({ action:'bulkUpdateLeader', changes, ts:Date.now() }),
-        mode:'cors', cache:'no-store'
-      });
-      let j=null; try{ j=await res.json(); }catch{}
-      ok = (j && (j.ok || Array.isArray(j))) || res.ok;
-    }catch(_){ ok=false; }
+    ok = await tryBulkJSON(changes);
+    if(!ok) ok = await tryBulkText(changes);
+    if(!ok) ok = await tryRosterBatch(changes);
+    if(!ok) ok = await tryPerRow(changes);
+  }catch(e){ ok = false; }
 
-    // 2) Fallback: per-change legacy calls
-    if(!ok){
-      const tasks = changes.map(c=> fetch(WEB_APP_URL, {
-        method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body: JSON.stringify({ action:'updateLeader', item:c.item, number:c.number, name:c.name, newLeader:c.newLeader, ts:Date.now() }),
-        mode:'cors', cache:'no-store'
-      }).then(r=>r.ok).catch(()=>false));
-      const results = await Promise.all(tasks);
-      ok = results.some(Boolean);
-    }
-
-    if(!ok) throw new Error('SERVER_NOK');
-
-    // local sync
-    for(const c of changes){
-      const row = state.rows.find(r=> r.item===c.item && r.number===c.number && r.name===c.name);
-      if(row) row.leader = c.newLeader;
-    }
-    pendingLeader.clear();
-    if(typeof showToast==='function') showToast('已儲存變更 / Saved');
-    elOvSave.textContent = txtOld; elOvSave.disabled = false;
-    buildOverview();
-    try{ search(); }catch{}
-  }catch(err){
-    console.error(err);
+  if(!ok){
     if(typeof showToast==='function') showToast('儲存失敗 / Save failed');
-    elOvSave.textContent = txtOld; elOvSave.disabled = false;
+    elOvSave.textContent = old; elOvSave.disabled = false;
+    return;
   }
+
+  // local sync + refresh
+  for(const c of changes){
+    const row = state.rows.find(r=> r.item===c.item && r.number===c.number && r.name===c.name);
+    if(row) row.leader = c.newLeader;
+  }
+  pendingLeader.clear();
+  if(typeof showToast==='function') showToast('已儲存變更 / Saved');
+  elOvSave.textContent = old; elOvSave.disabled = false;
+  buildOverview();
+  try{ search(); }catch(_){}
 });
 
 </script>

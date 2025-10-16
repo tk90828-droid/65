@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>【TW Pride】10/24 週五晚餐名單確認｜Reservation Confirmation</title>
+<title>Taiwan Pride 🌈｜Reservation Confirmation｜10/24 週五晚餐名單</title>
 <style>
   :root{
     /* S2 風格色盤 */
@@ -68,23 +68,74 @@
   .left,.right{display:flex;gap:10px;align-items:center;min-width:0}
   .left .flag{font-size:18px}
 
-  /* 第一行：旗 / 國家 / 姓名 / IG（皆置左＋ellipsis） */
-  .namebar{
-    display:grid;
-    grid-template-columns: auto minmax(0,28%) minmax(0,42%) minmax(0,30%);
-    align-items:center;
-    gap:10px;
-    min-width:0;
-  }
-  .namebar .flag{ font-size:18px; }
-  .namebar .country,
+  /* 第一行：旗 / 國家 / 姓名 / IG */
+  /* 第一行：旗 / 國家(極小) / 姓名 / IG — 分散對齊 */
+.namebar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+.namebar .flag{
+  font-size:18px;
+  line-height:1;
+  flex:0 0 auto;
+}
+/* 國家欄位保留但縮到極小寬度，避免影響既有程式碼 */
+.namebar .country{
+  flex:0 0 8px;     /* 幾乎不占版面 */
+  max-width:8px;
+  overflow:hidden;
+  white-space:nowrap;
+  opacity:0.6;
+}
+.namebar .personN{
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  flex:1 1 auto;
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.namebar .ig{
+  color:#aeb7c2;
+  font-size:13px;
+  flex:1 1 auto;
+  min-width:0;
+  text-align:right;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* 桌機：盡量完整顯示姓名與IG */
+@media (min-width:861px){
   .namebar .personN,
   .namebar .ig{
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+    white-space:normal;
+    overflow:visible;
+    text-overflow:unset;
   }
-  .namebar .country{ color:#E9EEF5; opacity:.95; font-weight:700; }
-  .namebar .personN{ color:#fff; font-weight:900; letter-spacing:.2px; font-size:16px; }
-  .namebar .ig{ color:#aeb7c2; font-size:12.5px; }
+}
+
+/* 手機小寬度：保持單行省略，避免擠在一起 */
+@media (max-width:420px){
+  .namebar .personN{ font-size:14px; }
+  .namebar .ig{ font-size:12px; }
+}/* 預設先給較小字體（你要求「再小一點」） */
+  .namebar .personN{ color:#fff; font-weight:900; letter-spacing:.2px; font-size:15px; }
+  .namebar .ig{ color:#aeb7c2; font-size:12px; }
+
+  /* 桌機寬度：NAME、IG 不再強制省略，允許自動換行顯示完整 */
+  @media (min-width: 861px){
+    .namebar{ grid-template-columns: auto minmax(0,22%) minmax(0,48%) minmax(0,30%); }
+    .namebar .personN,
+    .namebar .ig{
+      white-space:normal; overflow:visible; text-overflow:unset;
+    }
+  }
 
   /* 狀態徽章（描邊圈＋空心符號；雙行無斜線） */
   .status{display:inline-flex;align-items:center;gap:8px}
@@ -134,8 +185,13 @@
   .btn-line{border:1px solid #2b3244;background:#0f1117;color:#e5e7eb}
   .btn-fill{background:transparent;border:1px solid transparent;border-image:var(--rainbow) 1;font-weight:900}
 
-  /* 手機微縮與 IG 自動換行 */
-  @media (max-width:860px){.row{grid-template-columns:1fr}.actions{justify-content:space-between}}
+  /* 手機微縮與 IG 自動換行（必要時才省略） */
+  @media (max-width:860px){
+    .row{grid-template-columns:1fr}
+    .actions{justify-content:space-between}
+    .namebar .personN,
+    .namebar .ig{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  }
   @media (max-width:420px){
     .namebar{grid-template-columns:auto minmax(0,40%) minmax(0,60%);row-gap:6px}
     .namebar .ig{grid-column:2 / 5}
@@ -150,7 +206,7 @@
   <div class="wrap">
     <!-- 三行標題（白字＋光暈） -->
     <div class="title tl">
-      <div class="t1">【Taiwan Pride】</div>
+      <div class="t1">Taiwan Pride 🌈</div>
       <div class="t2">Reservation Confirmation</div>
       <div class="t3">10/24 週五晚餐名單</div>
     </div>
@@ -215,9 +271,9 @@
   <div id="toast" class="toast"></div>
 
   <script>
-  /* ========== (1) 設定：把這裡換成你的 GAS 網址 ========== */
+  /* ========== (1) 設定：把這裡換成你的 GAS URL ========== */
   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJdToNoRIc2q5-jT53c6jwcD6WNNDbNOBmhqE2ulDLmNDsBDo86hCVqj32AI9Fp53n/exec';
-  const PASSWORD = '0714'; // 上傳底圖保護用（僅 prompt，不在畫面顯示）
+  const PASSWORD = '0714'; // 上傳底圖保護用（僅 prompt）
 
   /* ========== (2) 狀態 ========== */
   const state = {
@@ -325,7 +381,7 @@
   function renderPerson(r){
     const card = document.createElement('div'); card.className='person';
 
-    /* 第一行：旗 / 國家 / 姓名 / IG（皆置左＋ellipsis） */
+    /* 第一行：旗 / 國家 / 姓名 / IG（桌機可自動換行顯示完整） */
     const L1 = document.createElement('div'); L1.className='line';
     const left1 = document.createElement('div'); left1.className='left namebar';
     const flag = document.createElement('div'); flag.className='flag'; flag.textContent = r.flag || '—';

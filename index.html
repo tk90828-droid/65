@@ -69,130 +69,42 @@
   .left .flag{font-size:18px}
 
   /* 第一行：旗 / 國家 / 姓名 / IG */
-  /* 第一行：旗 / 國家(極小) / 姓名 / IG — 分散對齊 */
-.namebar{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  min-width:0;
-}
-.namebar .flag{
-  font-size:18px;
-  line-height:1;
-  flex:0 0 auto;
-}
-/* 國家欄位保留但縮到極小寬度，避免影響既有程式碼 */
-.namebar .country{
-  flex:0 0 8px;
-  max-width:8px;
-  overflow:hidden;
-  white-space:nowrap;
-  opacity:0.6;
-}
-.namebar .personN{
-  color:#fff;
-  font-weight:900;
-  font-size:15px;
-  flex:1 1 auto;
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+  .namebar{display:flex;align-items:center;gap:8px;min-width:0}
+  .namebar .flag{font-size:18px;line-height:1;flex:0 0 auto}
+  .namebar .country{flex:0 0 8px;max-width:8px;overflow:hidden;white-space:nowrap;opacity:0.6}
+  .namebar .personN{color:#fff;font-weight:900;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* 桌機：盡量完整顯示姓名與IG */
-@media (min-width:861px){
-  .namebar .personN,
-  .namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-}
+  @media (min-width:861px){
+    .namebar .personN,.namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+  }
+  @media (max-width:420px){
+    .namebar .personN{color:#fff;font-weight:900;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  }
+  /* 預設小字體（維持既有樣式） */
+  .namebar .personN{color:#fff;font-weight:900;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .namebar .ig{color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* 手機小寬度：保持單行省略，避免擠在一起 */
-@media (max-width:420px){
-  .namebar .personN{
-  color:#fff;
-  font-weight:900;
-  font-size:15px;
-  flex:1 1 auto;
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-  .namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-}/* 預設先給較小字體（你要求「再小一點」） */
-  .namebar .personN{
-  color:#fff;
-  font-weight:900;
-  font-size:15px;
-  flex:1 1 auto;
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-  .namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+  @media (min-width: 861px){
+    .namebar .personN,.namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+  }
 
-  /* 桌機寬度：NAME、IG 不再強制省略，允許自動換行顯示完整 */
-  @media (min-width: 861px){ .namebar .personN, .namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-} }
-
-  /* 狀態徽章（描邊圈＋空心符號；雙行無斜線） */
+  /* === 狀態徽章（厚外圈＋深色內心＋白色符號；高級感） === */
   .status{display:inline-flex;align-items:center;gap:8px}
-  .badge{width:26px;height:26px;border-radius:999px;display:grid;place-items:center;background:transparent}
-  .badge svg{width:18px;height:18px}
-  .badge.ok{border:2px solid var(--ok);color:var(--ok)}
-  .badge.warn{border:2px solid var(--warn);color:var(--warn)}
-  .badge.bad{border:2px solid var(--bad);color:var(--bad)}
+  .badge{position:relative;width:26px;height:26px;display:grid;place-items:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+  .badge svg{width:26px;height:26px;display:block}
+  .badge.ok{color:var(--ok)}
+  .badge.warn{color:var(--warn)}
+  .badge.bad{color:var(--bad)}
+  .badge .ring{fill:#0f1117;stroke:currentColor;stroke-width:3.2}
+  .badge .glyph{stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;fill:none}
+  .badge .glyph-text{fill:#fff;font-size:13px;font-family:ui-sans-serif,system-ui;dominant-baseline:middle;text-anchor:middle}
+
   .status-label{display:flex;flex-direction:column;line-height:1.05}
   .status-label .zh{font-size:12px}
   .status-label .en{font-size:11px;opacity:.9}
@@ -238,42 +150,36 @@
   @media (max-width:860px){
     .row{grid-template-columns:1fr}
     .actions{justify-content:space-between}
-    .namebar .personN,
-    .namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+    .namebar .personN,.namebar .ig{
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
   }
   @media (max-width:420px){
     .namebar{}
     .namebar .ig{
-  color:#aeb7c2;
-  font-size:13px;
-  text-align:right;
-  flex:0 1 38%;
-  max-width:40%;
-  min-width:56px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+      color:#aeb7c2;font-size:13px;text-align:right;flex:0 1 38%;max-width:40%;min-width:56px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
     .tl .t1{font-size:24px}
     .tl .t2{font-size:18px}
     .tl .t3{font-size:14px}
     .btn{font-size:12px}
   }
 
-/* When a .line has only one child, don't spread space */
-.line{ justify-content:space-between; }
-.line:has(> :only-child){ justify-content:flex-start; }
+  /* When a .line has only one child, don't spread space */
+  .line{justify-content:space-between}
+  .line:has(> :only-child){justify-content:flex-start}
 
+  /* === SAFE OVERRIDES (do not touch JS) === */
+  .person > .line:first-of-type{justify-content:flex-start;width:100%}
+  .person > .line:first-of-type > .left.namebar{flex:1 1 auto;width:100%}
+
+  /* Loading spinner（尾巴轉圈） */
+  .spinner{
+    display:inline-block;width:14px;height:14px;margin-left:8px;vertical-align:-2px;
+    border:2px solid rgba(255,255,255,.18);border-top-color:#a7f3d0;border-radius:50%;
+    animation:spin 0.9s linear infinite; box-shadow:0 0 10px rgba(167,243,208,.35)
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -307,7 +213,7 @@
       <!-- 底圖預覽（上傳成功才會出現縮圖） -->
       <div id="bgPreview" class="preview" aria-label="invitation previews"></div>
 
-      <div id="head" class="result-head">資料載入中… / Loading roster…</div>
+      <div id="head" class="result-head">資料載入中… / Loading roster… <span class="spinner" aria-hidden="true"></span></div>
       <div id="grid" class="grid"></div>
     </div>
   </div>
@@ -364,16 +270,27 @@
   const unique = (arr)=>[...new Set(arr)];
   const by = (k)=>(a,b)=> (a[k]||'').localeCompare(b[k]||'');
 
+  /* 簡易切換 head 載入中樣式（尾巴轉圈） */
+  function setHeadLoading(isLoading){
+    const head = $('head'); if(!head) return;
+    if(isLoading){
+      head.innerHTML = '資料載入中… / Loading roster… <span class="spinner" aria-hidden="true"></span>';
+    }else{
+      head.textContent = '請於上方輸入「姓名或 IG」後搜尋 / Type NAME or IG to search';
+    }
+  }
+
   /* ========== (4) 讀雲端名單（GAS） ========== */
   async function fetchRoster(){
     try{
       if(!WEB_APP_URL){ $('head').textContent='尚未設定資料端點 / No WEB_APP_URL'; return; }
+      setHeadLoading(true);
       const res = await fetch(WEB_APP_URL + '?mode=roster', { method:'GET', cache:'no-store' });
       if(!res.ok) throw new Error('network');
       const data = await res.json();
       state.rows = Array.isArray(data) ? data : (data.rows || []);
       rebuildDatalists();
-      $('head').textContent = '請於上方輸入「姓名或 IG」後搜尋 / Type NAME or IG to search';
+      setHeadLoading(false);
     }catch(e){
       console.error(e);
       $('head').textContent = '名單載入失敗 / Failed to load roster';
@@ -495,19 +412,40 @@
   function buildStatus(status){
     const box=document.createElement('div'); box.className='status';
     const s = (status||'').toString().trim().toLowerCase();
-    let type='warn', zh='未回覆', en='Pending', icon='?';
-    if(s==='confirmed'){ type='ok'; zh='已確定訂位'; en='Confirmed'; icon='🐈‍⬛'; }
-    else if(s==='cancelled'){ type='bad'; zh='取消參加'; en='Cancelled'; icon='✕'; }
-    const badge=document.createElement('div'); badge.className='badge '+type; badge.innerHTML = svgIcon(icon);
+    let type='warn', zh='未回覆', en='Pending', iconType='warn';
+    if(s==='confirmed'){ type='ok'; zh='已確定訂位'; en='Confirmed'; iconType='ok'; }
+    else if(s==='cancelled'){ type='bad'; zh='取消參加'; en='Cancelled'; iconType='bad'; }
+    const badge=document.createElement('div'); badge.className='badge '+type; badge.innerHTML = svgIcon(iconType);
     const lab=document.createElement('div'); lab.className='status-label';
     lab.innerHTML = `<span class="zh">${zh}</span><span class="en">${en}</span>`;
     box.append(badge,lab); return box;
   }
-function svgIcon(char){
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <rect x="0" y="0" width="24" height="24" fill="transparent"></rect>
-      <text x="12" y="16" text-anchor="middle" font-size="18" font-family="ui-sans-serif, system-ui">${char}</text>
-    </svg>`;
+
+  /* 高質感圓形圖標：ok=勾、warn=問號、bad=叉（厚外圈＋深色內心＋白色符號） */
+  function svgIcon(kind){
+    if(kind==='ok'){
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="ring" cx="12" cy="12" r="10.5" />
+          <path class="glyph" d="M7 12.5l3 3 6-6" />
+        </svg>
+      `;
+    }
+    if(kind==='bad'){
+      return `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="ring" cx="12" cy="12" r="10.5" />
+          <path class="glyph" d="M8 8l8 8M16 8l-8 8" />
+        </svg>
+      `;
+    }
+    /* warn（預設） */
+    return `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle class="ring" cx="12" cy="12" r="10.5" />
+        <text class="glyph-text" x="12" y="12">?</text>
+      </svg>
+    `;
   }
 
   /* ========== (8) Confirm Modal ========== */
@@ -563,8 +501,8 @@ function svgIcon(char){
 
     const isH = W>=H;
     const box = isH
-      ? { x: 0.60*W, y: 0.70*H, w: 0.35*W, h: 0.18*H } /* 橫式安全區 */
-      : { x: 0.15*W, y: 0.60*H, w: 0.70*W, h: 0.16*H }; /* 直式安全區 */
+      ? { x: 0.60*W, y: 0.70*H, w: 0.35*W, h: 0.18*H }
+      : { x: 0.15*W, y: 0.60*H, w: 0.70*W, h: 0.16*H };
 
     const text = `${person.item||''}-${person.number||''}`.trim();
     const fontFamily = 'ui-sans-serif, system-ui, "Noto Sans TC", "Microsoft JhengHei"';

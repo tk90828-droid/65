@@ -129,21 +129,15 @@
   .namebar .ig{ color:#aeb7c2; font-size:12px; }
 
   /* 桌機寬度：NAME、IG 不再強制省略，允許自動換行顯示完整 */
-  @media (min-width: 861px){
-    .namebar{ grid-template-columns: auto minmax(0,22%) minmax(0,48%) minmax(0,30%); }
-    .namebar .personN,
-    .namebar .ig{
-      white-space:normal; overflow:visible; text-overflow:unset;
-    }
-  }
+  @media (min-width: 861px){ .namebar .personN, .namebar .ig{ white-space:normal; overflow:visible; text-overflow:unset; } }
 
   /* 狀態徽章（描邊圈＋空心符號；雙行無斜線） */
   .status{display:inline-flex;align-items:center;gap:8px}
-  .badge{width:22px;height:22px;border-radius:999px;display:grid;place-items:center;background:transparent}
-  .badge svg{width:14px;height:14px}
-  .badge.ok{border:2px solid var(--ok)}
-  .badge.warn{border:2px solid var(--warn)}
-  .badge.bad{border:2px solid var(--bad)}
+  .badge{width:26px;height:26px;border-radius:999px;display:grid;place-items:center;background:transparent}
+  .badge svg{width:18px;height:18px}
+  .badge.ok{border:2px solid var(--ok);color:var(--ok)}
+  .badge.warn{border:2px solid var(--warn);color:var(--warn)}
+  .badge.bad{border:2px solid var(--bad);color:var(--bad)}
   .status-label{display:flex;flex-direction:column;line-height:1.05}
   .status-label .zh{font-size:12px}
   .status-label .en{font-size:11px;opacity:.9}
@@ -193,7 +187,7 @@
     .namebar .ig{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   }
   @media (max-width:420px){
-    .namebar{grid-template-columns:auto minmax(0,40%) minmax(0,60%);row-gap:6px}
+    .namebar{}
     .namebar .ig{grid-column:2 / 5}
     .tl .t1{font-size:24px}
     .tl .t2{font-size:18px}
@@ -422,15 +416,18 @@
     const box=document.createElement('div'); box.className='status';
     const s = (status||'').toString().trim().toLowerCase();
     let type='warn', zh='未回覆', en='Pending', icon='?';
-    if(s==='confirmed'){ type='ok'; zh='已確定訂位'; en='Confirmed'; icon='✔'; }
+    if(s==='confirmed'){ type='ok'; zh='已確定訂位'; en='Confirmed'; icon='🐈‍⬛'; }
     else if(s==='cancelled'){ type='bad'; zh='取消參加'; en='Cancelled'; icon='✕'; }
     const badge=document.createElement('div'); badge.className='badge '+type; badge.innerHTML = svgIcon(icon);
     const lab=document.createElement('div'); lab.className='status-label';
     lab.innerHTML = `<span class="zh">${zh}</span><span class="en">${en}</span>`;
     box.append(badge,lab); return box;
   }
-  function svgIcon(char){
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><text x="12" y="16" text-anchor="middle" font-size="14" font-family="ui-sans-serif, system-ui">${char}</text></svg>`;
+function svgIcon(char){
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <rect x="0" y="0" width="24" height="24" fill="transparent"></rect>
+      <text x="12" y="16" text-anchor="middle" font-size="18" font-family="ui-sans-serif, system-ui">${char}</text>
+    </svg>`;
   }
 
   /* ========== (8) Confirm Modal ========== */

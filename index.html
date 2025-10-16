@@ -96,14 +96,14 @@
 
   /* === 狀態徽章（厚外圈＋深色內心＋白色符號；高級感） === */
   .status{display:inline-flex;align-items:center;gap:8px}
-  .badge{position:relative;width:26px;height:26px;display:grid;place-items:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
-  .badge svg{width:26px;height:26px;display:block}
+  .badge{position:relative;width:22px;height:22px;display:grid;place-items:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+  .badge svg{width:22px;height:22px;display:block}
   .badge.ok{color:var(--ok)}
   .badge.warn{color:var(--warn)}
   .badge.bad{color:var(--bad)}
-  .badge .ring{fill:#0f1117;stroke:currentColor;stroke-width:3.2}
-  .badge .glyph{stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;fill:none}
-  .badge .glyph-text{fill:#fff;font-size:13px;font-family:ui-sans-serif,system-ui;dominant-baseline:middle;text-anchor:middle}
+  .badge .ring{fill:#0f1117;stroke:currentColor;stroke-width:2.6}
+  .badge .glyph{stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none}
+  .badge .glyph-text{fill:#fff;font-size:12px;font-family:ui-sans-serif,system-ui;dominant-baseline:middle;text-anchor:middle}
 
   .status-label{display:flex;flex-direction:column;line-height:1.05}
   .status-label .zh{font-size:12px}
@@ -180,6 +180,36 @@
     animation:spin 0.9s linear infinite; box-shadow:0 0 10px rgba(167,243,208,.35)
   }
   @keyframes spin{to{transform:rotate(360deg)}}
+
+
+/* === 状態文字彩色光暈（未回覆=橘 / 已確認=綠 / 取消=紅） === */
+.status .badge.warn + .status-label .zh,
+.status .badge.warn + .status-label .en{
+  text-shadow:0 0 6px rgba(245,158,11,.65), 0 0 12px rgba(245,158,11,.35);
+}
+.status .badge.ok + .status-label .zh,
+.status .badge.ok + .status-label .en{
+  text-shadow:0 0 6px rgba(34,197,94,.60), 0 0 12px rgba(34,197,94,.30);
+}
+.status .badge.bad + .status-label .zh,
+.status .badge.bad + .status-label .en{
+  text-shadow:0 0 6px rgba(239,68,68,.60), 0 0 12px rgba(239,68,68,.30);
+}
+
+
+/* name 與 IG 金色（覆蓋） */
+.namebar .personN,
+.namebar .ig{
+  background: linear-gradient(180deg,
+    #EAD28A 0%,
+    #D9B550 35%,
+    #B98A32 70%,
+    #7A6027 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  font-weight: 900 !important;
+}
 </style>
 </head>
 <body>

@@ -83,7 +83,7 @@
 }
 /* 國家欄位保留但縮到極小寬度，避免影響既有程式碼 */
 .namebar .country{
-  flex:0 0 8px;     /* 幾乎不占版面 */
+  flex:0 0 8px;
   max-width:8px;
   overflow:hidden;
   white-space:nowrap;
@@ -102,9 +102,10 @@
 .namebar .ig{
   color:#aeb7c2;
   font-size:13px;
-  flex:1 1 auto;
-  min-width:0;
   text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -114,22 +115,76 @@
 @media (min-width:861px){
   .namebar .personN,
   .namebar .ig{
-    white-space:normal;
-    overflow:visible;
-    text-overflow:unset;
-  }
+  color:#aeb7c2;
+  font-size:13px;
+  text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 }
 
 /* 手機小寬度：保持單行省略，避免擠在一起 */
 @media (max-width:420px){
-  .namebar .personN{ font-size:14px; }
-  .namebar .ig{ font-size:12px; }
+  .namebar .personN{
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  flex:1 1 auto;
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+  .namebar .ig{
+  color:#aeb7c2;
+  font-size:13px;
+  text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 }/* 預設先給較小字體（你要求「再小一點」） */
-  .namebar .personN{ color:#fff; font-weight:900; letter-spacing:.2px; font-size:15px; }
-  .namebar .ig{ color:#aeb7c2; font-size:12px; }
+  .namebar .personN{
+  color:#fff;
+  font-weight:900;
+  font-size:15px;
+  flex:1 1 auto;
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+  .namebar .ig{
+  color:#aeb7c2;
+  font-size:13px;
+  text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
   /* 桌機寬度：NAME、IG 不再強制省略，允許自動換行顯示完整 */
-  @media (min-width: 861px){ .namebar .personN, .namebar .ig{ white-space:normal; overflow:visible; text-overflow:unset; } }
+  @media (min-width: 861px){ .namebar .personN, .namebar .ig{
+  color:#aeb7c2;
+  font-size:13px;
+  text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+} }
 
   /* 狀態徽章（描邊圈＋空心符號；雙行無斜線） */
   .status{display:inline-flex;align-items:center;gap:8px}
@@ -184,16 +239,41 @@
     .row{grid-template-columns:1fr}
     .actions{justify-content:space-between}
     .namebar .personN,
-    .namebar .ig{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .namebar .ig{
+  color:#aeb7c2;
+  font-size:13px;
+  text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
   }
   @media (max-width:420px){
     .namebar{}
-    .namebar .ig{grid-column:2 / 5}
+    .namebar .ig{
+  color:#aeb7c2;
+  font-size:13px;
+  text-align:right;
+  flex:0 1 38%;
+  max-width:40%;
+  min-width:56px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
     .tl .t1{font-size:24px}
     .tl .t2{font-size:18px}
     .tl .t3{font-size:14px}
     .btn{font-size:12px}
   }
+
+/* When a .line has only one child, don't spread space */
+.line{ justify-content:space-between; }
+.line:has(> :only-child){ justify-content:flex-start; }
+
 </style>
 </head>
 <body>
@@ -383,7 +463,7 @@
     const personN = document.createElement('span'); personN.className='personN'; personN.textContent = (r.name||'—');
     const ig = document.createElement('span'); ig.className='ig'; ig.textContent = (r.ig||'—');
     left1.append(flag, ctry, personN, ig);
-    L1.append(left1, document.createElement('div'));
+    L1.append(left1);
 
     /* 第二行（左：狀態；右：開啟連結） */
     const L2 = document.createElement('div'); L2.className='line';

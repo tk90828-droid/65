@@ -210,6 +210,67 @@
   color: transparent !important;
   font-weight: 900 !important;
 }
+
+/* ===== Overrides for status colors, buttons, and link button per request ===== */
+
+/* 1) 狀態文字：顏色 + 粗體 + 同色陰影 */
+.status .badge.ok + .status-label .zh,
+.status .badge.ok + .status-label .en{
+  color:#47D45A !important;
+  font-weight:900 !important;
+  text-shadow:0 0 6px rgba(71,212,90,.65) !important;
+}
+.status .badge.warn + .status-label .zh,
+.status .badge.warn + .status-label .en{
+  color:#FFC000 !important;
+  font-weight:900 !important;
+  text-shadow:0 0 6px rgba(255,192,0,.6) !important;
+}
+.status .badge.bad + .status-label .zh,
+.status .badge.bad + .status-label .en{
+  color:#C00000 !important;
+  font-weight:900 !important;
+  text-shadow:0 0 6px rgba(192,0,0,.6) !important;
+}
+
+/* 2) 確認 / 邀請函按鈕：改成「開啟連結」的外觀，但 hover 仍保留彩虹外框 */
+.actions .btn{
+  border: none !important;
+  background: rgba(0,255,209,.08) !important;
+  box-shadow: 0 0 0 1px rgba(0,255,209,.25),
+              0 0 18px rgba(0,255,209,.18) inset,
+              0 0 20px rgba(0,255,209,.15) !important;
+  color: #e5e7eb !important;
+  font-weight: 800 !important;
+  padding: 6px 9px;
+  border-radius: 10px;
+}
+.actions .btn:hover{
+  background: rgba(0,255,209,.08) !important;
+  box-shadow: 0 0 0 1px rgba(0,255,209,.35),
+              0 0 22px rgba(0,255,209,.22) inset,
+              0 0 24px rgba(0,255,209,.20) !important;
+  border: 1px solid transparent !important;
+  border-image: var(--rainbow) 1 !important;
+}
+
+/* 3) 開啟連結按鈕：青色文字 + 底線；移除外光與外框 */
+.link-btn{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: #00FFD1 !important;
+  text-decoration: underline !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-weight: 800 !important;
+}
+.link-btn:hover{
+  text-decoration: underline !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
 </style>
 </head>
 <body>

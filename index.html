@@ -427,7 +427,7 @@
 }
 
 
-/* ===== v25c：總覽（Overview）樣式 ===== */
+/* ===== v25e：總覽美化（隱藏按鈕極簡、隱藏列改彩虹圓點） ===== */
 .overview-wrap.left{  position:fixed; left:12px;  bottom:12px; z-index:31; opacity:.95; display:flex; gap:10px; align-items:center }
 .raku-btn{ width:auto; height:auto; border:none; background:transparent; padding:0; cursor:pointer }
 .raku-btn img{ height:80px; display:block; object-fit:contain }
@@ -438,7 +438,7 @@
   position:absolute; inset:6% 3% 9% 3%;
   background:#0f1117; border:1px solid #2b3244; border-radius:16px;
   box-shadow:0 20px 60px rgba(0,0,0,.5);
-  display:flex; flex-direction:column;
+  display:flex; flex-direction:column; overflow:hidden;
 }
 .ov-head{ display:flex; align-items:center; justify-content:space-between; padding:10px 14px; gap:8px; flex-wrap:wrap }
 .ov-title{ font-weight:900; font-size:18px }
@@ -446,22 +446,35 @@
 .ov-btn{ padding:6px 10px; border-radius:10px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb; font-weight:800; cursor:pointer }
 .ov-btn.primary{ border:0; background:linear-gradient(90deg,#a7f3d0,#93c5fd); color:#0b0c10; font-weight:900 }
 
-/* 可調欄寬：預設 100px；JS 會改 grid-auto-columns */
-.ov-scroller{ flex:1; overflow:auto; padding:8px 12px 12px; scroll-snap-type:x mandatory; white-space:nowrap }
+/* 可調欄寬（JS 控制 grid-auto-columns），預設 100px */
+.ov-scroller{ flex:1; overflow:auto; padding:12px; scroll-snap-type:x mandatory; white-space:nowrap }
 .ov-row{ display:inline-grid; grid-auto-flow:column; grid-auto-columns:100px; gap:8px }
 
 .table-card{
+  position:relative;
   scroll-snap-align:start;
   background:#10131A; border:1px solid #2b3244; border-radius:12px; padding:6px;
   min-height:110px; display:flex; flex-direction:column; gap:6px;
 }
-.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px }
+.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px; padding-top:10px }
 .table-title{
   font-weight:900; font-size:12px;
   background:linear-gradient(90deg,#ff5f6d,#ffc371,#9be15d,#00e3ae,#45aaf2,#9b59b6);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .table-meta{ font-size:10px; color:#9AA4AF }
+
+/* 更低干擾的隱藏按鈕：卡片上緣正上方、半透明小圓點 + hover 顯示 X */
+.hide-dot{
+  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  width:18px; height:18px; border-radius:999px;
+  background:rgba(255,255,255,.12); border:1px solid #2b3244;
+  cursor:pointer; display:grid; place-items:center; font-size:12px; color:#e5e7eb;
+  transition:transform .12s ease, background .12s ease;
+}
+.hide-dot::before{ content:''; }
+.hide-dot:hover{ transform:translateX(-50%) scale(1.06); background:rgba(255,255,255,.18) }
+.hide-dot:hover::before{ content:'×'; line-height:1; }
 
 .member{
   display:flex; align-items:center; gap:4px; padding:3px 4px; border-radius:8px;
@@ -473,16 +486,25 @@
   font-size:11px; color:#E5E7EB; font-weight:800;
   max-width:86px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 }
-
 .table-card.drag-hover{ outline:2px dashed #93c5fd; outline-offset:2px }
 
-/* 隱藏列（底部） */
-#ovHiddenBar{ padding:8px 12px; border-top:1px solid #2b3244; display:none; gap:8px; align-items:center; justify-content:space-between }
-#ovHiddenList{ display:flex; gap:6px; flex-wrap:wrap; max-height:72px; overflow:auto }
-.badge{ font-size:11px; border:1px solid #2b3244; border-radius:999px; padding:4px 8px; color:#e5e7eb }
-.badge.btn{ cursor:pointer }
+/* 隱藏列：彩虹圓點清單 */
+#ovHiddenBar{ display:none; border-top:1px solid #2b3244; background:#0f1117; padding:8px 12px; gap:8px; }
+#ovHiddenTop{ display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:6px }
+#ovHiddenList{ display:flex; flex-wrap:wrap; gap:14px; max-height:96px; overflow:auto; padding:4px 2px 8px }
 
-/* 欄寬調整控制（數值輸入，30~120px） */
+.hchip{ position:relative; display:flex; align-items:center; gap:6px }
+.hchip .dot{
+  width:16px; height:16px; border-radius:999px; flex:0 0 auto;
+  box-shadow:0 0 0 1px #2b3244 inset, 0 2px 8px rgba(0,0,0,.35);
+  cursor:pointer;
+}
+.hchip .label{
+  font-size:11px; color:#9AA4AF; max-width:120px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  transform:translateY(1px);
+}
+
+/* 欄寬控制（30–120px） */
 .ctrl{ display:flex; gap:6px; align-items:center }
 .ctrl label{ font-size:12px; color:#9AA4AF }
 .ctrl input[type="number"]{ width:88px; padding:6px 8px; border-radius:10px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb }
@@ -569,11 +591,11 @@
       <div id="ovRow" class="ov-row"></div>
     </div>
     <div id="ovHiddenBar">
-      <div class="hint" style="color:#9AA4AF;font-size:12px">已隱藏：<span id="ovHiddenCount">0</span></div>
-      <div id="ovHiddenList"></div>
-      <div class="ctrl">
-        <button id="ovUnhideAll" class="ov-btn">取消全部隱藏</button>
+      <div id="ovHiddenTop">
+        <div class="hint" style="color:#9AA4AF;font-size:12px">已隱藏：<span id="ovHiddenCount">0</span></div>
+        <div class="ctrl"><button id="ovUnhideAll" class="ov-btn">取消全部隱藏</button></div>
       </div>
+      <div id="ovHiddenList"></div>
     </div>
   </div>
 </div>
@@ -902,7 +924,7 @@ if(r.link){
   }
 
 
-/* ===== v25c：總覽功能（僅左側按鈕；欄寬 30–120px） ===== */
+/* ===== v25e：總覽功能（彩虹隱藏列、輕量隱藏點、Save 回寫強化） ===== */
 const OVERVIEW_PWD = '514714';
 const pendingLeader = new Map();
 const hiddenLeaders = new Set();
@@ -924,7 +946,7 @@ const elOvApplyWidth = document.getElementById('ovApplyWidth');
 function showOverviewWithPwd(){
   const pwd = window.prompt('請輸入總覽密碼 / Enter password');
   if(pwd === OVERVIEW_PWD){ openOverview(); }
-  else if(pwd !== null){ showToast && showToast('密碼錯誤 / Wrong password'); }
+  else if(pwd !== null){ if(typeof showToast==='function') showToast('密碼錯誤 / Wrong password'); }
 }
 function openOverview(){
   elOvBack.style.display='block'; ovOpen=true;
@@ -949,7 +971,10 @@ function applyOvWidth(){
 }
 elOvApplyWidth.addEventListener('click', applyOvWidth);
 
-/* Build overview */
+/* Rainbow palette for hidden chips */
+const RAINBOW = ['#EF4444','#F59E0B','#FACC15','#22C55E','#3B82F6','#8B5CF6'];
+
+/* Build overview (hide-dot centered above title) */
 function buildOverview(){
   if(!Array.isArray(state.rows) || !state.rows.length){
     elOvRow.innerHTML = '<div style="color:#9AA4AF;padding:12px">尚未載入名單</div>';
@@ -979,16 +1004,17 @@ function buildOverview(){
       elOvSave.disabled = pendingLeader.size === 0;
     });
 
-    const head = document.createElement('div'); head.className='table-head';
-    const left = document.createElement('div'); left.style.display='flex'; left.style.alignItems='center'; left.style.gap='6px';
-    const title = document.createElement('div'); title.className='table-title'; title.textContent = leader || '—';
-    const hideBtn = document.createElement('button'); hideBtn.className='ov-btn'; hideBtn.textContent='隱藏';
-    hideBtn.style.padding='4px 8px'; hideBtn.style.fontSize='11px';
-    hideBtn.addEventListener('click', ()=>{ hiddenLeaders.add(leader); buildOverview(); renderHiddenBar(); });
-    left.append(title, hideBtn);
+    // subtle hide dot on top-center
+    const hideDot = document.createElement('button');
+    hideDot.className='hide-dot';
+    hideDot.title='隱藏此桌';
+    hideDot.addEventListener('click', ()=>{ hiddenLeaders.add(leader); buildOverview(); renderHiddenBar(); });
+    card.appendChild(hideDot);
 
+    const head = document.createElement('div'); head.className='table-head';
+    const title = document.createElement('div'); title.className='table-title'; title.textContent = leader || '—';
     const meta = document.createElement('div'); meta.className='table-meta'; meta.textContent = `${members.length} people`;
-    head.append(left, meta);
+    head.append(title, meta);
 
     const list = document.createElement('div');
     members.forEach(m=>{
@@ -1011,6 +1037,7 @@ function buildOverview(){
   renderHiddenBar();
 }
 
+/* Render rainbow hidden chips */
 function renderHiddenBar(){
   const count = hiddenLeaders.size;
   elOvHiddenCnt.textContent = String(count);
@@ -1019,19 +1046,27 @@ function renderHiddenBar(){
     elOvHiddenList.innerHTML='';
     return;
   }
-  elOvHiddenBar.style.display='flex';
+  elOvHiddenBar.style.display='block';
   elOvHiddenList.innerHTML='';
+  let i = 0;
   [...hiddenLeaders].forEach(leader=>{
-    const b = document.createElement('span');
-    b.className='badge btn';
-    b.textContent = leader || '—';
-    b.title = '點擊取消隱藏';
-    b.addEventListener('click', ()=>{
+    const chip = document.createElement('div');
+    chip.className='hchip';
+    const dot = document.createElement('div');
+    dot.className='dot';
+    dot.style.background = RAINBOW[i % RAINBOW.length];
+    dot.title = '點擊恢復此桌';
+    dot.addEventListener('click', ()=>{
       hiddenLeaders.delete(leader);
       buildOverview();
       renderHiddenBar();
     });
-    elOvHiddenList.appendChild(b);
+    const lab = document.createElement('div');
+    lab.className='label';
+    lab.textContent = leader || '—';
+    chip.append(dot, lab);
+    elOvHiddenList.appendChild(chip);
+    i++;
   });
 }
 elOvUnhideAll.addEventListener('click', ()=>{
@@ -1040,47 +1075,59 @@ elOvUnhideAll.addEventListener('click', ()=>{
   renderHiddenBar();
 });
 
-/* Save：批次回寫（需後端 action: bulkUpdateLeader） */
+/* Save：批次回寫（加上後備方案：若 bulk 失敗，逐筆嘗試 legacy action） */
 elOvSave.addEventListener('click', async ()=>{
   if(pendingLeader.size===0) return;
-  try{
-    elOvSave.disabled = true; elOvSave.textContent='Saving…';
-    const changes = [];
-    for(const [ukey, newLeader] of pendingLeader.entries()){
-      const row = state.rows.find(r=> `${r.item||''}-${r.number||''}-${(r.name||'').trim()}` === ukey );
-      if(!row) continue;
-      if((row.leader||'') === newLeader) continue;
-      changes.push({
-        item:row.item, number:row.number, name:row.name, ig:row.ig,
-        country:row.country, flag:row.flag, oldLeader:row.leader, newLeader
-      });
-    }
-    if(changes.length===0){ showToast && showToast('沒有變更'); elOvSave.textContent='Save'; return; }
+  const changes = [];
+  for(const [ukey, newLeader] of pendingLeader.entries()){
+    const row = state.rows.find(r=> `${r.item||''}-${r.number||''}-${(r.name||'').trim()}` === ukey );
+    if(!row) continue;
+    if((row.leader||'') === newLeader) continue;
+    changes.push({ item:row.item, number:row.number, name:row.name, ig:row.ig, country:row.country, flag:row.flag, oldLeader:row.leader, newLeader });
+  }
+  if(changes.length===0){ if(typeof showToast==='function') showToast('沒有變更'); return; }
 
-    const payload = { action:'bulkUpdateLeader', changes, ts:Date.now() };
-    const res = await fetch(WEB_APP_URL, {
-      method:'POST',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body: JSON.stringify(payload),
-      mode:'cors', cache:'no-store'
-    });
-    let ok=false; try{ const j=await res.json(); ok=!!j.ok || Array.isArray(j); }catch{ ok=res.ok; }
+  elOvSave.disabled = true; const txtOld = elOvSave.textContent; elOvSave.textContent='Saving…';
+  try{
+    // 1) Try bulk
+    let ok = false;
+    try{
+      const res = await fetch(WEB_APP_URL, {
+        method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify({ action:'bulkUpdateLeader', changes, ts:Date.now() }),
+        mode:'cors', cache:'no-store'
+      });
+      let j=null; try{ j=await res.json(); }catch{}
+      ok = (j && (j.ok || Array.isArray(j))) || res.ok;
+    }catch(_){ ok=false; }
+
+    // 2) Fallback: per-change legacy calls
+    if(!ok){
+      const tasks = changes.map(c=> fetch(WEB_APP_URL, {
+        method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify({ action:'updateLeader', item:c.item, number:c.number, name:c.name, newLeader:c.newLeader, ts:Date.now() }),
+        mode:'cors', cache:'no-store'
+      }).then(r=>r.ok).catch(()=>false));
+      const results = await Promise.all(tasks);
+      ok = results.some(Boolean);
+    }
+
     if(!ok) throw new Error('SERVER_NOK');
 
+    // local sync
     for(const c of changes){
       const row = state.rows.find(r=> r.item===c.item && r.number===c.number && r.name===c.name);
       if(row) row.leader = c.newLeader;
     }
     pendingLeader.clear();
-    showToast && showToast('已儲存變更 / Saved');
-    elOvSave.textContent='Save';
+    if(typeof showToast==='function') showToast('已儲存變更 / Saved');
+    elOvSave.textContent = txtOld; elOvSave.disabled = false;
     buildOverview();
     try{ search(); }catch{}
   }catch(err){
     console.error(err);
-    showToast && showToast('儲存失敗 / Save failed');
-    elOvSave.textContent='Save';
-    elOvSave.disabled = false;
+    if(typeof showToast==='function') showToast('儲存失敗 / Save failed');
+    elOvSave.textContent = txtOld; elOvSave.disabled = false;
   }
 });
 

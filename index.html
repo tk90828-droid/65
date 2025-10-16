@@ -427,7 +427,7 @@
 }
 
 
-/* ===== v25f：總覽（更小按鈕、左右工具列、眼睛圖示、回寫強化） ===== */
+/* ===== v25all：總覽 UI（左側按鈕、可調欄寬、隱藏眼睛、彩虹圓點） ===== */
 .overview-wrap.left{ position:fixed; left:12px; bottom:12px; z-index:31; opacity:.95; display:flex; gap:10px; align-items:center }
 .raku-btn{ width:auto; height:auto; border:none; background:transparent; padding:0; cursor:pointer }
 .raku-btn img{ height:72px; display:block; object-fit:contain }
@@ -444,10 +444,8 @@
 .ov-title{ font-weight:900; font-size:16px }
 .ov-tools{ display:flex; align-items:center; justify-content:space-between; width:100%; gap:8px }
 .ov-tools-left, .ov-tools-right{ display:flex; gap:6px; align-items:center; flex-wrap:wrap }
-
 .ov-btn{ padding:4px 8px; border-radius:9px; border:1px solid #2b3244; background:#0f1117; color:#e5e7eb; font-weight:700; cursor:pointer; font-size:12px }
 .ov-btn.primary{ border:0; background:linear-gradient(90deg,#a7f3d0,#93c5fd); color:#0b0c10; font-weight:900 }
-.ov-btn.icon{ width:22px; height:22px; padding:0; display:grid; place-items:center; }
 
 /* 欄寬控制（30–120px） */
 .ctrl{ display:flex; gap:6px; align-items:center }
@@ -464,7 +462,7 @@
   background:#10131A; border:1px solid #2b3244; border-radius:12px; padding:6px;
   min-height:110px; display:flex; flex-direction:column; gap:6px;
 }
-.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px; padding-top:8px }
+.table-head{ display:flex; align-items:center; justify-content:space-between; gap:6px; padding-top:10px }
 .table-title{
   font-weight:900; font-size:12px;
   background:linear-gradient(90deg,#ff5f6d,#ffc371,#9be15d,#00e3ae,#45aaf2,#9b59b6);
@@ -472,15 +470,13 @@
 }
 .table-meta{ font-size:10px; color:#9AA4AF }
 
-/* 小型「眼睛」隱藏按鈕：卡片上方正中，極小尺寸 */
+/* 純眼睛：置中、無外圈 */
 .hide-eye{
-  position:absolute; top:-8px; left:50%; transform:translateX(-50%);
-  width:16px; height:16px; border-radius:999px; border:1px solid #2b3244;
-  background:#0f1117; color:#e5e7eb; font-size:11px; line-height:14px; text-align:center;
-  cursor:pointer; opacity:.9;
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+  background:none; border:none; padding:0; margin:0;
+  font-size:16px; line-height:1; cursor:pointer; filter:drop-shadow(0 1px 1px rgba(0,0,0,.35));
 }
-.hide-eye::before{ content:'👁'; }
-.hide-eye:hover{ transform:translateX(-50%) scale(1.05); }
+.hide-eye:focus{ outline:none }
 
 .member{
   display:flex; align-items:center; gap:4px; padding:3px 4px; border-radius:8px;
@@ -491,11 +487,10 @@
 .member .m-name{ font-size:11px; color:#E5E7EB; font-weight:800; max-width:86px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
 .table-card.drag-hover{ outline:2px dashed #93c5fd; outline-offset:2px }
 
-/* 隱藏列：彩虹圓點（更緊湊） */
+/* 隱藏列：彩虹圓點 */
 #ovHiddenBar{ display:none; border-top:1px solid #2b3244; background:#0f1117; padding:8px 10px; gap:6px; }
 #ovHiddenTop{ display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap; margin-bottom:4px }
 #ovHiddenList{ display:flex; flex-wrap:wrap; gap:12px; max-height:90px; overflow:auto; padding:2px 0 6px }
-
 .hchip{ position:relative; display:flex; align-items:center; gap:6px }
 .hchip .dot{ width:14px; height:14px; border-radius:999px; flex:0 0 auto; box-shadow:0 0 0 1px #2b3244 inset, 0 2px 8px rgba(0,0,0,.35); cursor:pointer; }
 .hchip .label{ font-size:10px; color:#9AA4AF; max-width:110px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transform:translateY(1px); }
@@ -919,7 +914,8 @@ if(r.link){
   }
 
 
-/* ===== v25f：總覽功能（回寫強化 + 小眼睛 + 左右工具列） ===== */
+/* ===== v25all：Overview 功能整合 ===== */
+window.state = window.state || { rows: [] };
 const OVERVIEW_PWD = '514714';
 const pendingLeader = new Map();
 const hiddenLeaders = new Set();
@@ -996,9 +992,9 @@ function buildOverview(){
       elOvSave.disabled = pendingLeader.size === 0;
     });
 
-    // tiny eye
+    // pure eye icon
     const hideEye = document.createElement('button');
-    hideEye.className='hide-eye'; hideEye.title='隱藏此桌';
+    hideEye.className='hide-eye'; hideEye.title='隱藏此桌'; hideEye.textContent='👁';
     hideEye.addEventListener('click', ()=>{ hiddenLeaders.add(leader); buildOverview(); renderHiddenBar(); });
     card.appendChild(hideEye);
 
@@ -1052,81 +1048,53 @@ function renderHiddenBar(){
 }
 elOvUnhideAll.addEventListener('click', ()=>{ hiddenLeaders.clear(); buildOverview(); renderHiddenBar(); });
 
-/* SAVE：嘗試多種回寫協定以確保 roster 更新 */
-async function tryBulkJSON(changes){
-  const res = await fetch(WEB_APP_URL, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ action:'bulkUpdateLeader', sheet:'roster', changes, ts:Date.now() }),
-    mode:'cors', cache:'no-store'
-  });
-  let j=null; try{ j = await res.json(); }catch{}
-  return (j && (j.ok || Array.isArray(j))) || res.ok;
+/* SAVE：相容多種 GAS 佈署（支持 opaque） */
+async function fetchMaybeOk(url, init){
+  try{
+    const res = await fetch(url, init);
+    if(res.type === 'opaque') return true;
+    if(res.ok) return true;
+    try{ const j = await res.json(); return !!(j && (j.ok || Array.isArray(j))); }catch(_){}
+    return false;
+  }catch(_){ return false; }
 }
-async function tryBulkText(changes){
-  const res = await fetch(WEB_APP_URL, {
-    method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body: JSON.stringify({ action:'bulkUpdateLeader', sheet:'roster', changes, ts:Date.now() }),
-    mode:'cors', cache:'no-store'
-  });
-  let j=null; try{ j = await res.json(); }catch{}
-  return (j && (j.ok || Array.isArray(j))) || res.ok;
-}
-async function tryRosterBatch(changes){
-  const res = await fetch(WEB_APP_URL, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ action:'updateRoster', data: changes, ts:Date.now() }),
-    mode:'cors', cache:'no-store'
-  });
-  let j=null; try{ j = await res.json(); }catch{}
-  return (j && (j.ok || Array.isArray(j))) || res.ok;
-}
-async function tryPerRow(changes){
-  const results = await Promise.all(changes.map(c=> fetch(WEB_APP_URL, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ action:'updateLeader', sheet:'roster', item:c.item, number:c.number, name:c.name, newLeader:c.newLeader, ts:Date.now() }),
-    mode:'cors', cache:'no-store'
-  }).then(r=>r.ok).catch(()=>false)));
-  return results.some(Boolean);
+async function saveChanges(changes){
+  const payload = { action:'bulkUpdateLeader', sheet:'roster', changes, ts:Date.now() };
+  if(await fetchMaybeOk(WEB_APP_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload), mode:'cors', cache:'no-store' })) return true;
+  if(await fetchMaybeOk(WEB_APP_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload), mode:'cors', cache:'no-store' })) return true;
+  const form = new URLSearchParams({ action:'bulkUpdateLeader', sheet:'roster', payload: JSON.stringify(changes), ts:String(Date.now()) });
+  if(await fetchMaybeOk(WEB_APP_URL, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: form.toString(), mode:'no-cors', cache:'no-store' })) return true;
+  for(const c of changes){
+    const ok = await fetchMaybeOk(WEB_APP_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'updateLeader', sheet:'roster', item:c.item, number:c.number, name:c.name, newLeader:c.newLeader, ts:Date.now() }), mode:'cors', cache:'no-store' });
+    if(!ok) return false;
+  }
+  return true;
 }
 
 elOvSave.addEventListener('click', async ()=>{
   if(pendingLeader.size===0) return;
-  // pack changes
   const changes = [];
   for(const [ukey, newLeader] of pendingLeader.entries()){
     const row = state.rows.find(r=> `${r.item||''}-${r.number||''}-${(r.name||'').trim()}` === ukey );
     if(!row) continue;
     if((row.leader||'') === newLeader) continue;
-    changes.push({
-      item:row.item, number:row.number, name:row.name, ig:row.ig, country:row.country, flag:row.flag,
-      oldLeader:row.leader, newLeader
-    });
+    changes.push({ item:row.item, number:row.number, name:row.name, ig:row.ig, country:row.country, flag:row.flag, oldLeader:row.leader, newLeader });
   }
   if(changes.length===0){ if(typeof showToast==='function') showToast('沒有變更'); return; }
 
   const old = elOvSave.textContent; elOvSave.textContent='Saving…'; elOvSave.disabled = true;
-
-  let ok = false;
-  try{
-    ok = await tryBulkJSON(changes);
-    if(!ok) ok = await tryBulkText(changes);
-    if(!ok) ok = await tryRosterBatch(changes);
-    if(!ok) ok = await tryPerRow(changes);
-  }catch(e){ ok = false; }
-
+  const ok = await saveChanges(changes);
   if(!ok){
     if(typeof showToast==='function') showToast('儲存失敗 / Save failed');
     elOvSave.textContent = old; elOvSave.disabled = false;
     return;
   }
-
-  // local sync + refresh
   for(const c of changes){
     const row = state.rows.find(r=> r.item===c.item && r.number===c.number && r.name===c.name);
     if(row) row.leader = c.newLeader;
   }
   pendingLeader.clear();
-  if(typeof showToast==='function') showToast('已儲存變更 / Saved');
+  if(typeof showToast==='function') showToast('已送出更新 / Saved');
   elOvSave.textContent = old; elOvSave.disabled = false;
   buildOverview();
   try{ search(); }catch(_){}
